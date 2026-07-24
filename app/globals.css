@@ -1,6 +1,21 @@
 @import "tailwindcss";
 
+:root {
+  --gold: #c49a2b;
+  --gold-light: #dca54a;
+  --gold-dark: #a8841e;
+  --ink: #1a2352;
+  --cream: #faf8f4;
+}
 
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: var(--gold-light);
+  color: #fff;
+}
 
 body {
   font-family: var(--font-inter);
@@ -60,6 +75,12 @@ textarea {
   border-radius: 50%;
   cursor: pointer;
   margin-top: -6px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.range-custom::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 0 6px rgba(220, 165, 74, 0.18);
 }
 
 /* Firefox */
@@ -77,4 +98,289 @@ textarea {
   background: #DCA54A;
   border-radius: 50%;
   cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.range-custom::-moz-range-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 0 6px rgba(220, 165, 74, 0.18);
+}
+
+
+/* ================================================================
+   Micro-animations & interactions
+   ================================================================ */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes kenburns {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.07);
+  }
+}
+
+@keyframes scrollCue {
+
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.9;
+  }
+
+  50% {
+    transform: translateY(7px);
+    opacity: 0.35;
+  }
+}
+
+@keyframes shine {
+  from {
+    left: -80%;
+  }
+
+  to {
+    left: 140%;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.94) translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes pulseRing {
+  0% {
+    box-shadow: 0 0 0 0 rgba(200, 149, 42, 0.45);
+  }
+
+  70% {
+    box-shadow: 0 0 0 12px rgba(200, 149, 42, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(200, 149, 42, 0);
+  }
+}
+
+/* ---------- Scroll reveal (used with <Reveal />) ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.reveal-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- Hero ---------- */
+.hero-kenburns {
+  animation: kenburns 22s ease-in-out infinite alternate;
+}
+
+/* Carousel slide crossfade + drift */
+.hero-slide {
+  opacity: 0;
+  transition: opacity 1.2s ease;
+  will-change: opacity;
+}
+
+.hero-slide.hero-slide-active {
+  opacity: 1;
+}
+
+.hero-slide.hero-slide-active .hero-slide-img {
+  animation: kenburns 9s ease-out forwards;
+}
+
+/* Per-slide caption entrance (retriggered via key remount) */
+.hero-caption-line {
+  opacity: 0;
+  animation: fadeUp 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+.hero-caption-line-2 {
+  animation-delay: 0.15s;
+}
+
+/* Autoplay progress bar */
+@keyframes heroProgress {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.hero-progress-fill {
+  transform-origin: left;
+  transform: scaleX(0);
+  animation: heroProgress var(--hero-interval, 6s) linear forwards;
+}
+
+.hero-progress-paused {
+  animation-play-state: paused;
+}
+
+.hero-anim {
+  opacity: 0;
+  animation: fadeUp 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+.hero-anim-1 {
+  animation-delay: 0.25s;
+}
+
+.hero-anim-2 {
+  animation-delay: 0.45s;
+}
+
+.hero-anim-3 {
+  animation-delay: 0.65s;
+}
+
+.hero-scroll-cue {
+  animation: scrollCue 2s ease-in-out infinite;
+}
+
+/* ---------- Buttons ---------- */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shine::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -80%;
+  height: 100%;
+  width: 45%;
+  background: linear-gradient(115deg,
+      transparent,
+      rgba(255, 255, 255, 0.4),
+      transparent);
+  transform: skewX(-20deg);
+  pointer-events: none;
+}
+
+.btn-shine:hover::after {
+  animation: shine 0.85s ease;
+}
+
+/* ---------- Cards ---------- */
+.card-lift {
+  transition:
+    transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1),
+    box-shadow 0.4s ease;
+}
+
+.card-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px -14px rgba(26, 35, 82, 0.22);
+}
+
+/* ---------- Modals ---------- */
+.modal-backdrop {
+  animation: fadeIn 0.25s ease both;
+}
+
+.modal-pop {
+  animation: zoomIn 0.3s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+/* ---------- Accents ---------- */
+.gold-rule {
+  width: 64px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold-light), transparent);
+}
+
+.pulse-gold {
+  animation: pulseRing 2.4s ease-out infinite;
+}
+
+/* Nav link underline that grows from the left on hover */
+.nav-grow {
+  position: relative;
+}
+
+.nav-grow::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 12px;
+  right: 12px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.nav-grow:hover::before {
+  transform: scaleX(1);
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal,
+  .hero-anim,
+  .hero-caption-line {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .hero-kenburns,
+  .hero-scroll-cue,
+  .pulse-gold,
+  .hero-slide.hero-slide-active .hero-slide-img,
+  .hero-progress-fill {
+    animation: none !important;
+  }
 }

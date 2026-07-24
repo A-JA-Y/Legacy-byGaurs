@@ -60,7 +60,7 @@ const ContactForm = () => {
     }`;
 
   return (
-    <div className="bg-white rounded-xl shadow-lg px-5 md:p-[55px] py-6 w-full">
+    <div className="bg-white rounded-xl shadow-lg px-5 md:p-[55px] py-6 w-full border-t-2 border-[#c8952a] transition-shadow duration-500 hover:shadow-2xl">
       <div className="flex flex-col md:flex-row md:items-center gap-6">
         {/* LEFT: Text Block */}
         <div className="md:w-1/3 flex-shrink-0">
@@ -127,7 +127,7 @@ const ContactForm = () => {
             <button
               onClick={handleSubmit}
               disabled={loading}
-              className="w-full md:w-auto bg-[#c8952a] hover:bg-[#b07d1f] text-white text-sm font-semibold tracking-widest uppercase px-6 py-3 rounded-md transition-colors duration-300 whitespace-nowrap disabled:opacity-70"
+              className="btn-shine w-full md:w-auto bg-[#c8952a] hover:bg-[#b07d1f] text-white text-sm font-semibold tracking-widest uppercase px-6 py-3 rounded-md transition-all duration-300 whitespace-nowrap disabled:opacity-70 cursor-pointer hover:shadow-lg hover:shadow-[#c8952a]/30 hover:-translate-y-0.5 disabled:hover:translate-y-0"
             >
               {loading ? "Submitting..." : "Get Brochure"}
             </button>

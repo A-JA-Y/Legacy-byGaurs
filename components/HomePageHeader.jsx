@@ -54,7 +54,7 @@ export default function HomePageHeader() {
                   className={`relative text-[13px] font-bold px-3 py-1.5 whitespace-nowrap tracking-widest uppercase transition-colors
                     ${isActive(item.href)
                       ? "text-[#C49A2B] after:absolute after:bottom-0 after:left-3 after:right-3 after:h-[2px] after:bg-[#C49A2B] after:rounded-full"
-                      : "text-[#555] hover:text-[#C49A2B]"
+                      : "nav-grow text-[#555] hover:text-[#C49A2B]"
                     }`}
                 >
                   {item.label}
@@ -70,7 +70,7 @@ export default function HomePageHeader() {
                   className={`relative text-[13px] font-bold px-3 py-1.5 whitespace-nowrap tracking-widest uppercase transition-colors
                     ${isActive(item.href)
                       ? "text-[#C49A2B] after:absolute after:bottom-0 after:left-3 after:right-3 after:h-[2px] after:bg-[#C49A2B] after:rounded-full"
-                      : "text-[#555] hover:text-[#C49A2B]"
+                      : "nav-grow text-[#555] hover:text-[#C49A2B]"
                     }`}
                 >
                   {item.label}
@@ -83,10 +83,10 @@ export default function HomePageHeader() {
           <div className="hidden xl:flex items-center pl-6 border-l border-[rgba(196,154,43,0.2)] flex-shrink-0">
             <Link
               href="/contact-us"
-              className="inline-flex items-center gap-2 bg-[#C49A2B] hover:bg-[#A8841E] text-white text-[10px] font-semibold uppercase tracking-widest px-5 py-2.5 transition-colors"
+              className="btn-shine group inline-flex items-center gap-2 bg-[#C49A2B] hover:bg-[#A8841E] text-white text-[10px] font-semibold uppercase tracking-widest px-5 py-2.5 transition-all duration-300 hover:shadow-md hover:shadow-[#C49A2B]/40"
             >
               Enquire Now
-              <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none" className="transition-transform duration-300 group-hover:translate-x-1">
                 <path d="M1.5 5.5h8M6 2l3.5 3.5L6 9" stroke="white" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </Link>

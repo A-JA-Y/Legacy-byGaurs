@@ -3,7 +3,7 @@ import API from "./api";
 const submitForm = async ({ data }) => {
   try {
     
-    const response = await API.post("/godrejgolf/submit-lead", data);
+    const response = await API.post("/godrejgolf/submit-lead", {...data, site:"legacybygaurs"});
 
     
     console.log("Form submitted successfully:", response);

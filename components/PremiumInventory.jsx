@@ -1,5 +1,6 @@
 // Specifications per brochure p. 60; nearby infrastructure is Jaypee Greens /
 // Greater Noida.
+import Reveal from "./Reveal";
 
 const interiorFeatures = [
   "Imported marble in living, dining & bedrooms",
@@ -34,20 +35,22 @@ export default function VillaFeatures() {
       id="investment-benefits"
     >
       <div className="max-w-5xl mx-auto">
-        <h6 className="text-center uppercase mb-3" style={{ color: "#c8922a", letterSpacing: "2.5px", fontSize: "11px", fontWeight: 600 }}>
-          Reserved for the few
-        </h6>
-        <h2
-          className="text-center font-bold text-gray-900 mb-10"
-          style={{ fontSize: "clamp(1.4rem, 3.5vw, 2rem)", lineHeight: "1.25", color: "#2c1f0e" }}
-        >
-          Residence Features &amp; Specifications
-        </h2>
+        <Reveal>
+          <h6 className="text-center uppercase mb-3" style={{ color: "#c8922a", letterSpacing: "2.5px", fontSize: "11px", fontWeight: 600 }}>
+            Reserved for the few
+          </h6>
+          <h2
+            className="text-center font-bold text-gray-900 mb-10"
+            style={{ fontSize: "clamp(1.4rem, 3.5vw, 2rem)", lineHeight: "1.25", color: "#2c1f0e" }}
+          >
+            Residence Features &amp; Specifications
+          </h2>
+        </Reveal>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
 
           {/* Card 1 — Interiors */}
-          <div className="bg-white p-7" style={{ borderTop: "3px solid #DCA54A" }}>
+          <Reveal className="card-lift bg-white p-7" style={{ borderTop: "3px solid #DCA54A" }}>
             <p style={{ fontSize: "10px", fontWeight: 600, letterSpacing: "2px", color: "#c8922a", textTransform: "uppercase", marginBottom: "8px" }}>
               Interiors &amp; Design
             </p>
@@ -74,10 +77,10 @@ export default function VillaFeatures() {
                 ))}
               </div>
             </div>
-          </div>
+          </Reveal>
 
           {/* Card 2 — Space & Layout */}
-          <div className="bg-white p-7" style={{ borderTop: "3px solid #DCA54A" }}>
+          <Reveal delay={100} className="card-lift bg-white p-7" style={{ borderTop: "3px solid #DCA54A" }}>
             <p style={{ fontSize: "10px", fontWeight: 600, letterSpacing: "2px", color: "#c8922a", textTransform: "uppercase", marginBottom: "8px" }}>
               Space &amp; Layout
             </p>
@@ -102,10 +105,10 @@ export default function VillaFeatures() {
                 </li>
               ))}
             </ul>
-          </div>
+          </Reveal>
 
           {/* Card 3 — Social Infrastructure */}
-          <div className="bg-white p-7" style={{ borderTop: "3px solid #DCA54A" }}>
+          <Reveal delay={200} className="card-lift bg-white p-7" style={{ borderTop: "3px solid #DCA54A" }}>
             <p style={{ fontSize: "10px", fontWeight: 600, letterSpacing: "2px", color: "#c8922a", textTransform: "uppercase", marginBottom: "8px" }}>
               Social Infrastructure
             </p>
@@ -128,7 +131,7 @@ export default function VillaFeatures() {
                 </div>
               ))}
             </div>
-          </div>
+          </Reveal>
 
         </div>
       </div>

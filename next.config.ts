@@ -1,5 +1,7 @@
 import createMDX from "@next/mdx";
 import bundleAnalyzer from "@next/bundle-analyzer";
+import { output } from "./next-sitemap.config";
+import { NextConfig } from "next";
 
 const withMDX = createMDX({
   options: {
@@ -12,8 +14,12 @@ const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
 });
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+
+const nextConfig: NextConfig = {
+  output: "export",
+  images: {
+    unoptimized: true,
+  },
   pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
 
   allowedDevOrigins: ["192.168.29.216"],
