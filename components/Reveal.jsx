@@ -4,7 +4,8 @@ import { useEffect, useRef } from "react";
 
 // Scroll-reveal wrapper: fades content up once it enters the viewport.
 // Pairs with the .reveal / .reveal-visible classes in globals.css.
-export default function Reveal({ children, delay = 0, className = "", as: Tag = "div", style }) {
+// variant: "up" (default) | "left" | "right" | "zoom" | "mask"
+export default function Reveal({ children, delay = 0, className = "", as: Tag = "div", style, variant = "up" }) {
   const ref = useRef(null);
 
   useEffect(() => {
@@ -30,7 +31,7 @@ export default function Reveal({ children, delay = 0, className = "", as: Tag = 
   return (
     <Tag
       ref={ref}
-      className={`reveal ${className}`}
+      className={`reveal ${variant !== "up" ? `reveal-${variant}` : ""} ${className}`}
       style={delay ? { ...style, transitionDelay: `${delay}ms` } : style}
     >
       {children}

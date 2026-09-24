@@ -1,18 +1,16 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/data/seo";
 import Image from "next/image";
 import Link from "next/link";
+import { FaAward } from "react-icons/fa";
 import PageBanner from "@/components/PageBanner";
 import logo from "@/assets/legacy-logo.webp";
 import StickyDownloadButton from "@/components/StickyButton";
 import ModalWrapper from "@/components/ModalWrapper";
 import { brand } from "@/data/brand";
+import townshipImg from "@/assets/tower-exterior.webp";
 
-export const metadata: Metadata = {
-  title: "About Gaurs Group | The Developer Behind Legacy by Gaurs",
-  description:
-    "Gaurs Group has delivered 75,000+ units and 100 million+ sq. ft. across 30 years. Learn about the developer behind Legacy by Gaurs at Jaypee Greens, Greater Noida.",
-  alternates: { canonical: `${brand.site}/about-gaurs-group` },
-};
+export const metadata: Metadata = pageMetadata("gaursGroup");
 
 // Awards — brochure p. 61.
 const awards = [
@@ -35,16 +33,18 @@ export default function AboutGaursGroupPage() {
   return (
     <>
       <PageBanner
+        headingLevel="h1"
         eyebrow="The Developer"
         title="About Gaurs Group"
         subtitle="Since 1995, a beacon of excellence in real estate — 30 years of unfaltering commitment, and the group behind Legacy by Gaurs."
+        image={townshipImg}
       />
       <ModalWrapper />
 
       {/* Intro */}
       <section className="w-full bg-white py-16 px-6">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row gap-10 items-start">
-          <div className="md:w-1/3 flex-shrink-0">
+          <div className="md:w-1/3 flex-shrink-0" data-reveal="zoom">
             <Image
               src={logo}
               alt={brand.developer}
@@ -54,15 +54,15 @@ export default function AboutGaursGroupPage() {
             />
           </div>
 
-          <div className="flex-1 flex flex-col gap-4">
-            <p className="text-gray-600 text-sm leading-relaxed">
+          <div className="flex-1 flex flex-col gap-4" data-stagger="90">
+            <p data-reveal="up" className="text-gray-600 text-sm leading-relaxed">
               Since its inception in 1995, Gaurs has stood as a beacon of excellence in
               real estate. Our diverse portfolio ranges from luxurious apartments to
               affordable homes, each occupied by thousands of satisfied families. Our
               unwavering commitment to earning customer trust has been our key to
               success.
             </p>
-            <p className="text-gray-600 text-sm leading-relaxed">
+            <p data-reveal="up" className="text-gray-600 text-sm leading-relaxed">
               At Gaurs Group, our vision of luxury transcends mere construction — it is
               a continuous journey towards creating better life experiences that turn
               into treasured memories. Our &lsquo;life-craftsmen&rsquo; are selected for
@@ -70,14 +70,15 @@ export default function AboutGaursGroupPage() {
               all expectations.
             </p>
 
-            <p className="text-xs uppercase tracking-widest text-[#c8922a] font-semibold mt-2">
+            <p data-reveal="up" className="text-xs uppercase tracking-widest text-[#c8922a] font-semibold mt-2">
               Real Estate · Retail · Education · Hotels · NBFC · Contracting · Sports · Energy
             </p>
 
-            <div className="mt-4">
+            <div data-reveal="up" className="mt-4">
               <Link
                 href="/about-legacy-by-gaurs"
-                className="inline-block bg-[#DCA54A] hover:bg-[#C08F3C] text-white text-xs font-semibold tracking-widest uppercase px-6 py-3 rounded-md transition-colors"
+                data-magnetic
+                className="btn-shine inline-block bg-[#DCA54A] hover:bg-[#C08F3C] text-white text-xs font-semibold tracking-widest uppercase px-6 py-3 rounded-md transition-colors"
               >
                 Explore Legacy by Gaurs
               </Link>
@@ -87,22 +88,26 @@ export default function AboutGaursGroupPage() {
       </section>
 
       {/* Track record */}
-      <section className="w-full bg-[#1A2352] py-16 px-6">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-center text-2xl md:text-3xl font-bold text-[#F5E7C8] mb-3">
+      <section className="relative w-full bg-[#1A2352] py-20 px-6 overflow-hidden">
+        <div className="absolute inset-0 banner-lines pointer-events-none" />
+        <div className="relative max-w-5xl mx-auto">
+          <h2 data-reveal="up" className="text-center text-2xl md:text-3xl font-bold text-[#F5E7C8] mb-3">
             The Milestones We Cherish
           </h2>
-          <p className="text-center text-[#C9CEE4] text-sm mb-12 max-w-2xl mx-auto">
+          <p data-reveal="up" data-reveal-delay="80" className="text-center text-[#C9CEE4] text-sm mb-12 max-w-2xl mx-auto">
             A track record built over three decades.
           </p>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6" data-stagger="100">
             {brand.stats.map((s) => (
               <div
                 key={s.label}
-                className="text-center border border-[#3A4478] rounded-lg py-6 px-3"
+                data-reveal="up"
+                className="group text-center border border-[#3A4478] rounded-lg py-8 px-3 transition-all duration-500 hover:border-[#DCA54A]/60 hover:bg-white/[0.03] hover:shadow-[0_0_40px_rgba(220,165,74,0.12)]"
               >
-                <p className="text-3xl md:text-4xl font-bold text-[#DCA54A]">{s.value}</p>
+                <p data-count className="text-3xl md:text-5xl font-bold text-shimmer tabular-nums" style={{ fontFamily: "var(--font-work-sans)" }}>
+                  {s.value}
+                </p>
                 <p className="text-[#C9CEE4] text-xs mt-2 leading-snug">{s.label}</p>
               </div>
             ))}
@@ -113,36 +118,40 @@ export default function AboutGaursGroupPage() {
       {/* Portfolio */}
       <section className="w-full bg-[#FAF8F4] py-16 px-6">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-center text-2xl md:text-3xl font-bold text-gray-900 mb-12">
+          <h2 data-reveal="up" className="text-center text-2xl md:text-3xl font-bold text-gray-900 mb-12">
             Delivered Portfolio
           </h2>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16" data-stagger="80">
             {portfolio.map((p) => (
+              <div key={p.label} data-reveal="up">
               <div
-                key={p.label}
-                className="bg-white text-center py-6 px-3 rounded-lg border-t-[3px] border-[#DCA54A]"
+                data-tilt
+                className="h-full bg-white text-center py-6 px-3 rounded-lg border-t-[3px] border-[#DCA54A]"
               >
-                <p className="text-3xl font-bold text-[#2c1f0e]">{p.value}</p>
+                <p data-count className="text-3xl font-bold text-[#2c1f0e] tabular-nums">{p.value}</p>
                 <p className="text-gray-500 text-xs mt-2 leading-snug">{p.label}</p>
+              </div>
               </div>
             ))}
           </div>
 
           {/* Awards */}
-          <h2 className="text-center text-2xl md:text-3xl font-bold text-gray-900 mb-3">
+          <h2 data-reveal="up" className="text-center text-2xl md:text-3xl font-bold text-gray-900 mb-3">
             Awards &amp; Accolades
           </h2>
-          <p className="text-center text-gray-500 text-sm mb-10">
+          <p data-reveal="up" data-reveal-delay="80" className="text-center text-gray-500 text-sm mb-10">
             Our trophy shelf tells the story.
           </p>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" data-stagger="80">
             {awards.map((a) => (
+              <div key={`${a.award}-${a.title}`} data-reveal="up">
               <div
-                key={`${a.award}-${a.title}`}
-                className="bg-white p-5 rounded-lg border border-[#e8dfc8] flex flex-col gap-1.5"
+                data-tilt
+                className="h-full bg-white p-5 rounded-lg border border-[#e8dfc8] flex flex-col gap-1.5"
               >
+                <FaAward aria-hidden="true" className="text-[#DCA54A] text-xl mb-1" />
                 <p className="text-[10px] uppercase tracking-widest text-[#c8922a] font-semibold leading-snug">
                   {a.award}
                 </p>
@@ -150,6 +159,7 @@ export default function AboutGaursGroupPage() {
                   {a.title}
                 </p>
                 <p className="text-xs text-gray-500">{a.project}</p>
+              </div>
               </div>
             ))}
           </div>

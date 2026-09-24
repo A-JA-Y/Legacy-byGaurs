@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/data/seo";
 import PageBanner from "@/components/PageBanner";
 import LocationAdvantages from "@/components/LocationAdvantages";
 import StickyDownloadButton from "@/components/StickyButton";
+import FaqAccordion from "@/components/FaqAccordion";
+import StatsBand from "@/components/StatsBand";
+import Marquee from "@/components/Marquee";
+import expressway from "@/assets/expressway.webp";
 
-export const metadata: Metadata = {
-  title: "Legacy by Gaurs Location — Jaypee Greens Connectivity",
-  description:
-    "Legacy by Gaurs location at Jaypee Greens offers seamless connectivity to Pari Chowk, metro, Yamuna Expressway and the upcoming Noida International Airport.",
-  alternates: { canonical: "https://www.legacybygaurs.com/location-connectivity" },
-};
+export const metadata: Metadata = pageMetadata("location");
 
 const locationHighlights = [
   "Near Pari Chowk, Greater Noida",
@@ -117,27 +117,34 @@ const faqData = [
   }
 ];
 
+const MAX_MINUTES = 60;
+
 export default function LocationConnectivityPage() {
   return (
     <>
-
+      <PageBanner
+        eyebrow="Plot B-10, Jaypee Greens"
+        title="Location & Connectivity"
+        subtitle="Close to Pari Chowk, the Aqua Line metro, the Yamuna Expressway and the Noida International Airport at Jewar."
+        image={expressway}
+      />
 
       {/* Main Content Section */}
       <section className="w-full bg-white py-16 px-6" id="location">
         <div className="max-w-5xl mx-auto">
 
           {/* Label */}
-          <p className="text-center text-xs font-bold uppercase mb-4 text-[#c8922a] tracking-[0.2em]">
+          <p data-reveal="up" className="text-center text-xs font-bold uppercase mb-4 text-[#c8922a] tracking-[0.2em]">
             Location & Connectivity
           </p>
 
           {/* H1 Heading */}
-          <h1 className="text-center font-bold text-gray-900 mb-6 text-3xl md:text-4xl leading-tight">
+          <h1 data-reveal="up" className="text-center font-bold text-gray-900 mb-6 text-3xl md:text-4xl leading-tight">
             Legacy by Gaurs Location — Jaypee Greens Connectivity & Neighbourhood Guide
           </h1>
 
           {/* Intro Paragraph */}
-          <div className="max-w-4xl mx-auto text-center mb-8">
+          <div data-reveal="up" className="max-w-4xl mx-auto text-center mb-8">
             <p className="text-gray-600 leading-relaxed text-sm md:text-base">
               The Legacy by Gaurs location is one of the most strategically positioned luxury addresses in the entire National Capital Region. Set at Plot B-10 inside Jaypee Greens, the project enjoys direct, low-traffic access to the Noida–Greater Noida Expressway, Pari Chowk, the Yamuna Expressway corridor and the upcoming Noida International Airport at Jewar. For luxury home buyers and investors, location is not just a feature — it is the single most important factor that protects long-term value. And Legacy by Gaurs is built around exactly that principle.
             </p>
@@ -146,7 +153,8 @@ export default function LocationConnectivityPage() {
                 href="https://maps.google.com/?q=Jaypee+Greens+Golf+Course,+Greater+Noida"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block bg-[#c8922a] hover:bg-[#b07d20] text-white font-semibold px-6 py-3 rounded-md transition-colors"
+                data-magnetic
+                className="btn-shine inline-block bg-[#c8922a] hover:bg-[#b07d20] text-white font-semibold px-6 py-3 rounded-md"
               >
                 Get Driving Directions →
               </a>
@@ -154,7 +162,7 @@ export default function LocationConnectivityPage() {
           </div>
 
           {/* H2 - Where Exactly */}
-          <h2 className="font-bold text-gray-900 text-2xl md:text-3xl mt-12 mb-4">
+          <h2 data-reveal="up" className="font-bold text-gray-900 text-2xl md:text-3xl mt-12 mb-4">
             Where Exactly is Legacy by Gaurs?
           </h2>
           <p className="text-gray-600 leading-relaxed mb-4 text-sm md:text-base">
@@ -163,7 +171,7 @@ export default function LocationConnectivityPage() {
           <p className="text-gray-600 leading-relaxed mb-4 text-sm md:text-base">
             The address sits at the intersection of three major growth corridors: the Noida–Greater Noida Expressway to the west, the Yamuna Expressway to the south, and the upcoming Noida International Airport at Jewar to the south-east. This triangle of infrastructure is exactly why the Legacy by Gaurs location is being called one of the most future-proof real estate addresses in North India.
           </p>
-          <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 mb-8">
+          <div data-reveal="zoom" className="bg-gray-50 p-4 rounded-lg border-l-4 border-[#DCA54A] mb-8">
             <p className="font-semibold text-gray-800">Project Address:</p>
             <p className="text-gray-600 text-sm">
               Legacy by Gaurs<br />
@@ -173,7 +181,7 @@ export default function LocationConnectivityPage() {
           </div>
 
           {/* H2 - Why Location Matters */}
-          <h2 className="font-bold text-gray-900 text-2xl md:text-3xl mt-12 mb-4">
+          <h2 data-reveal="up" className="font-bold text-gray-900 text-2xl md:text-3xl mt-12 mb-4">
             Why the Jaypee Greens Address Matters
           </h2>
           <p className="text-gray-600 leading-relaxed mb-4 text-sm md:text-base">
@@ -187,8 +195,8 @@ export default function LocationConnectivityPage() {
               "Connected on all four sides — Metro, expressway, airport and arterial roads",
               "Tier-1 social infrastructure — Schools, hospitals, malls and corporate offices already operating within a 10–15 minute radius"
             ].map((item, i) => (
-              <li key={i} className="flex items-start gap-3">
-                <span className="text-[#c8922a] mt-1">✓</span>
+              <li key={i} className="group flex items-start gap-3 rounded-md px-2 py-1 -mx-2 transition-all duration-300 hover:bg-[#faf6e8] hover:translate-x-1">
+                <span className="text-[#c8922a] mt-1 transition-transform duration-300 group-hover:scale-125">✓</span>
                 <span className="text-gray-600 text-sm">{item}</span>
               </li>
             ))}
@@ -201,7 +209,7 @@ export default function LocationConnectivityPage() {
           <div className="flex flex-col lg:flex-row gap-12 items-start mt-8">
 
             {/* LEFT: TEXT */}
-            <div className="flex-1 max-w-lg">
+            <div className="flex-1 max-w-lg" data-reveal="left">
 
               <h3 className="font-bold text-gray-900 mb-3 text-base">
                 Strategic Connectivity
@@ -217,8 +225,8 @@ export default function LocationConnectivityPage() {
 
               <ul className="space-y-4">
                 {locationHighlights.map((item, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <span className="text-[#c8922a] mt-1">✓</span>
+                  <li key={i} className="group flex items-start gap-3 rounded-md px-2 py-1 -mx-2 transition-all duration-300 hover:bg-[#faf6e8] hover:translate-x-1">
+                    <span className="text-[#c8922a] mt-1 transition-transform duration-300 group-hover:scale-125">✓</span>
                     <span className="text-gray-800 text-sm">{item}</span>
                   </li>
                 ))}
@@ -226,8 +234,8 @@ export default function LocationConnectivityPage() {
             </div>
 
             {/* RIGHT: MAP */}
-            <div className="flex-1 w-full">
-              <div className="w-full h-[300px] md:h-[400px] rounded-lg overflow-hidden shadow-md border border-[#e5dcc5]">
+            <div className="flex-1 w-full" data-reveal="right">
+              <div className="w-full h-[300px] md:h-[400px] rounded-lg overflow-hidden shadow-md border border-[#e5dcc5] transition-shadow duration-500 hover:shadow-xl hover:shadow-[#c8922a]/15">
                 <iframe
                   src="https://maps.google.com/maps?q=Jaypee+Greens+Golf+Course,+Greater+Noida&output=embed"
                   width="100%"
@@ -241,7 +249,7 @@ export default function LocationConnectivityPage() {
                 href="https://maps.google.com/?q=Jaypee+Greens+Golf+Course,+Greater+Noida"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block mt-3 text-sm text-[#c8922a] hover:underline"
+                className="link-draw inline-block mt-3 text-sm text-[#c8922a]"
               >
                 View on Google Maps →
               </a>
@@ -254,16 +262,16 @@ export default function LocationConnectivityPage() {
       <section className="w-full bg-gray-50 py-16 px-6">
         <div className="max-w-5xl mx-auto">
 
-          <h2 className="font-bold text-gray-900 text-2xl md:text-3xl mb-8 text-center">
+          <h2 data-reveal="up" className="font-bold text-gray-900 text-2xl md:text-3xl mb-8 text-center">
             Connectivity from Legacy by Gaurs
           </h2>
 
           {/* Metro Connectivity */}
-          <h3 className="font-bold text-gray-900 text-xl mb-3">Metro Connectivity</h3>
+          <h3 data-reveal="left" className="font-bold text-gray-900 text-xl mb-3">Metro Connectivity</h3>
           <p className="text-gray-600 leading-relaxed mb-3 text-sm">
             The Aqua Line metro brings Legacy by Gaurs residents within walking distance of fast urban transit.
           </p>
-          <ul className="space-y-1 mb-6">
+          <ul data-reveal="up" className="space-y-1 mb-6">
             <li className="flex items-start gap-3">
               <span className="text-[#c8922a] mt-1">•</span>
               <span className="text-gray-600 text-sm">Pari Chowk Metro Station — 8 minutes</span>
@@ -290,8 +298,8 @@ export default function LocationConnectivityPage() {
           </p>
 
           {/* Road Connectivity */}
-          <h3 className="font-bold text-gray-900 text-xl mb-3">Road Connectivity</h3>
-          <ul className="space-y-1 mb-6">
+          <h3 data-reveal="left" className="font-bold text-gray-900 text-xl mb-3">Road Connectivity</h3>
+          <ul data-reveal="up" className="space-y-1 mb-6">
             <li className="flex items-start gap-3">
               <span className="text-[#c8922a] mt-1">•</span>
               <span className="text-gray-600 text-sm">Noida–Greater Noida Expressway — directly accessible, the spine of NCR connectivity</span>
@@ -319,8 +327,8 @@ export default function LocationConnectivityPage() {
           </ul>
 
           {/* Air Connectivity */}
-          <h3 className="font-bold text-gray-900 text-xl mb-3">Air Connectivity</h3>
-          <ul className="space-y-1 mb-6">
+          <h3 data-reveal="left" className="font-bold text-gray-900 text-xl mb-3">Air Connectivity</h3>
+          <ul data-reveal="up" className="space-y-1 mb-6">
             <li className="flex items-start gap-3">
               <span className="text-[#c8922a] mt-1">•</span>
               <span className="text-gray-600 text-sm">Noida International Airport (Jewar) — 30 minutes (India's largest airport, scheduled to begin commercial operations soon)</span>
@@ -339,8 +347,8 @@ export default function LocationConnectivityPage() {
           </p>
 
           {/* Rail Connectivity */}
-          <h3 className="font-bold text-gray-900 text-xl mb-3">Rail Connectivity</h3>
-          <ul className="space-y-1 mb-6">
+          <h3 data-reveal="left" className="font-bold text-gray-900 text-xl mb-3">Rail Connectivity</h3>
+          <ul data-reveal="up" className="space-y-1 mb-6">
             <li className="flex items-start gap-3">
               <span className="text-[#c8922a] mt-1">•</span>
               <span className="text-gray-600 text-sm">Boraki Multi-Modal Transport Hub (under construction) — 12 minutes</span>
@@ -363,44 +371,73 @@ export default function LocationConnectivityPage() {
       {/* Distance Snapshot Table */}
       <section className="w-full bg-white py-16 px-6">
         <div className="max-w-5xl mx-auto">
-          <h2 className="font-bold text-gray-900 text-2xl md:text-3xl mb-6 text-center">
+          <h2 data-reveal="up" className="font-bold text-gray-900 text-2xl md:text-3xl mb-6 text-center">
             Distance Snapshot — Legacy by Gaurs Location
           </h2>
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse">
+          <p data-reveal="up" className="text-center text-gray-500 text-sm mb-8">Approximate drive times by road from Plot B-10, Jaypee Greens.</p>
+          <div className="overflow-x-auto rounded-xl border border-[#e8dfc8] shadow-sm" data-reveal="up">
+            <table className="w-full border-collapse min-w-[560px]">
               <thead>
-                <tr className="bg-gray-100">
-                  <th className="border border-gray-300 px-4 py-2 text-left text-gray-700 font-semibold">Destination</th>
-                  <th className="border border-gray-300 px-4 py-2 text-left text-gray-700 font-semibold">Distance</th>
-                  <th className="border border-gray-300 px-4 py-2 text-left text-gray-700 font-semibold">Approx. Time</th>
+                <tr className="bg-[#FAF8F4] text-[#c8922a] uppercase text-xs tracking-wider">
+                  <th className="px-5 py-4 text-left font-semibold">Destination</th>
+                  <th className="px-5 py-4 text-left font-semibold">Distance</th>
+                  <th className="px-5 py-4 text-left font-semibold w-[40%]">Approx. Time</th>
                 </tr>
               </thead>
               <tbody>
-                {distanceData.map((item, i) => (
-                  <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                    <td className="border border-gray-300 px-4 py-2 text-gray-600 text-sm">{item.destination}</td>
-                    <td className="border border-gray-300 px-4 py-2 text-gray-600 text-sm">{item.distance}</td>
-                    <td className="border border-gray-300 px-4 py-2 text-gray-600 text-sm">{item.time}</td>
-                  </tr>
-                ))}
+                {distanceData.map((item, i) => {
+                  const minutes = parseInt(item.time, 10);
+                  return (
+                    <tr key={i} className="border-t border-[#efe7d3] transition-colors duration-300 hover:bg-[#FAF6E8]">
+                      <td className="px-5 py-3.5 text-gray-800 text-sm font-medium">{item.destination}</td>
+                      <td className="px-5 py-3.5 text-gray-600 text-sm whitespace-nowrap">{item.distance}</td>
+                      <td className="px-5 py-3.5 text-sm">
+                        <div className="flex items-center gap-3">
+                          <span className="travel-track flex-1">
+                            <span
+                              className="travel-fill"
+                              style={{ width: `${Math.min(100, (minutes / MAX_MINUTES) * 100)}%`, transitionDelay: `${i * 70}ms` }}
+                            />
+                          </span>
+                          <span className="text-gray-700 font-semibold whitespace-nowrap w-16 text-right">{item.time}</span>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
         </div>
       </section>
 
+      <StatsBand
+        eyebrow="Minutes, Not Hours"
+        title="Everything Within Easy Reach"
+        stats={[
+          { value: "5", label: "Mins to Alpha 1 metro" },
+          { value: "8", label: "Mins to Yamuna Expressway" },
+          { value: "30", label: "Mins to Jewar Airport" },
+          { value: "60", label: "Mins to Delhi IGI Airport" },
+        ]}
+      />
+      <Marquee
+        reverse
+        items={["Pari Chowk", "Aqua Line Metro", "Yamuna Expressway", "Noida International Airport", "Buddh International Circuit", "Knowledge Park", "Noida–Greater Noida Expressway", "FNG Expressway"]}
+      />
+
       {/* Education Section */}
       <section className="w-full bg-gray-50 py-16 px-6">
         <div className="max-w-5xl mx-auto">
-          <h2 className="font-bold text-gray-900 text-2xl md:text-3xl mb-4">
+          <h2 data-reveal="up" className="font-bold text-gray-900 text-2xl md:text-3xl mb-4">
             Education Near Legacy by Gaurs
           </h2>
-          <p className="text-gray-600 leading-relaxed mb-4 text-sm">
+          <p data-reveal="up" className="text-gray-600 leading-relaxed mb-4 text-sm">
             Jaypee Greens is surrounded by some of the most respected schools and universities in the region — meaning families never have to commute far for quality education.
           </p>
-          <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
+          <ul className="grid grid-cols-1 md:grid-cols-2 gap-2" data-stagger="50">
             {educationData.map((item, i) => (
-              <li key={i} className="flex items-start gap-3">
+              <li key={i} data-reveal="up" className="flex items-start gap-3 rounded-md px-3 py-2 -mx-1 transition-all duration-300 hover:bg-white hover:shadow-md hover:translate-x-1">
                 <span className="text-[#c8922a] mt-1">•</span>
                 <span className="text-gray-600 text-sm">{item}</span>
               </li>
@@ -412,15 +449,15 @@ export default function LocationConnectivityPage() {
       {/* Healthcare Section */}
       <section className="w-full bg-white py-16 px-6">
         <div className="max-w-5xl mx-auto">
-          <h2 className="font-bold text-gray-900 text-2xl md:text-3xl mb-4">
+          <h2 data-reveal="up" className="font-bold text-gray-900 text-2xl md:text-3xl mb-4">
             Healthcare Near Legacy by Gaurs
           </h2>
-          <p className="text-gray-600 leading-relaxed mb-4 text-sm">
+          <p data-reveal="up" className="text-gray-600 leading-relaxed mb-4 text-sm">
             The Legacy by Gaurs location places residents within a 7–25 minute drive of multiple super-specialty hospitals.
           </p>
-          <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
+          <ul className="grid grid-cols-1 md:grid-cols-2 gap-2" data-stagger="50">
             {healthcareData.map((item, i) => (
-              <li key={i} className="flex items-start gap-3">
+              <li key={i} data-reveal="up" className="flex items-start gap-3 rounded-md px-3 py-2 -mx-1 transition-all duration-300 hover:bg-white hover:shadow-md hover:translate-x-1">
                 <span className="text-[#c8922a] mt-1">•</span>
                 <span className="text-gray-600 text-sm">{item}</span>
               </li>
@@ -432,15 +469,15 @@ export default function LocationConnectivityPage() {
       {/* Workspaces Section */}
       <section className="w-full bg-gray-50 py-16 px-6">
         <div className="max-w-5xl mx-auto">
-          <h2 className="font-bold text-gray-900 text-2xl md:text-3xl mb-4">
+          <h2 data-reveal="up" className="font-bold text-gray-900 text-2xl md:text-3xl mb-4">
             Workspaces Near Legacy by Gaurs
           </h2>
-          <p className="text-gray-600 leading-relaxed mb-4 text-sm">
+          <p data-reveal="up" className="text-gray-600 leading-relaxed mb-4 text-sm">
             Greater Noida and Noida together form one of India's fastest-growing IT, manufacturing and corporate hubs. The Legacy by Gaurs location at Jaypee Greens puts residents within easy reach of the region's major employment zones.
           </p>
-          <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
+          <ul className="grid grid-cols-1 md:grid-cols-2 gap-2" data-stagger="50">
             {workspaceData.map((item, i) => (
-              <li key={i} className="flex items-start gap-3">
+              <li key={i} data-reveal="up" className="flex items-start gap-3 rounded-md px-3 py-2 -mx-1 transition-all duration-300 hover:bg-white hover:shadow-md hover:translate-x-1">
                 <span className="text-[#c8922a] mt-1">•</span>
                 <span className="text-gray-600 text-sm">{item}</span>
               </li>
@@ -452,15 +489,15 @@ export default function LocationConnectivityPage() {
       {/* Lifestyle Section */}
       <section className="w-full bg-white py-16 px-6">
         <div className="max-w-5xl mx-auto">
-          <h2 className="font-bold text-gray-900 text-2xl md:text-3xl mb-4">
+          <h2 data-reveal="up" className="font-bold text-gray-900 text-2xl md:text-3xl mb-4">
             Lifestyle, Shopping &amp; Entertainment Near Legacy by Gaurs
           </h2>
-          <p className="text-gray-600 leading-relaxed mb-4 text-sm">
+          <p data-reveal="up" className="text-gray-600 leading-relaxed mb-4 text-sm">
             The Legacy by Gaurs location offers a balance of premium urban lifestyle and quiet township living.
           </p>
-          <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
+          <ul className="grid grid-cols-1 md:grid-cols-2 gap-2" data-stagger="50">
             {lifestyleData.map((item, i) => (
-              <li key={i} className="flex items-start gap-3">
+              <li key={i} data-reveal="up" className="flex items-start gap-3 rounded-md px-3 py-2 -mx-1 transition-all duration-300 hover:bg-white hover:shadow-md hover:translate-x-1">
                 <span className="text-[#c8922a] mt-1">•</span>
                 <span className="text-gray-600 text-sm">{item}</span>
               </li>
@@ -472,15 +509,15 @@ export default function LocationConnectivityPage() {
       {/* Future-Proof Section */}
       <section className="w-full bg-gray-50 py-16 px-6">
         <div className="max-w-5xl mx-auto">
-          <h2 className="font-bold text-gray-900 text-2xl md:text-3xl mb-4">
+          <h2 data-reveal="up" className="font-bold text-gray-900 text-2xl md:text-3xl mb-4">
             Why the Legacy by Gaurs Location is Future-Proof
           </h2>
-          <p className="text-gray-600 leading-relaxed mb-4 text-sm">
+          <p data-reveal="up" className="text-gray-600 leading-relaxed mb-4 text-sm">
             Most luxury townships in India are sold on what they will be. Legacy by Gaurs is being launched at the exact moment its surrounding infrastructure is being delivered. Here's what's happening within a 30-minute radius:
           </p>
-          <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
+          <ul className="grid grid-cols-1 md:grid-cols-2 gap-2" data-stagger="50">
             {futureInfraProjects.map((item, i) => (
-              <li key={i} className="flex items-start gap-3">
+              <li key={i} data-reveal="up" className="flex items-start gap-3 rounded-md px-3 py-2 -mx-1 transition-all duration-300 hover:bg-white hover:shadow-md hover:translate-x-1">
                 <span className="text-[#c8922a] mt-1">•</span>
                 <span className="text-gray-600 text-sm">{item}</span>
               </li>
@@ -495,21 +532,10 @@ export default function LocationConnectivityPage() {
       {/* FAQ Section with Schema */}
       <section className="w-full bg-white py-16 px-6" id="faq">
         <div className="max-w-4xl mx-auto">
-          <h2 className="font-bold text-gray-900 text-2xl md:text-3xl mb-8 text-center">
+          <h2 data-reveal="up" className="font-bold text-gray-900 text-2xl md:text-3xl mb-8 text-center">
             Frequently Asked Questions
           </h2>
-          <div className="space-y-4">
-            {faqData.map((item, index) => (
-              <div key={index} className="border border-gray-200 rounded-lg p-4">
-                <h3 className="font-semibold text-gray-800 text-base mb-2">
-                  {item.question}
-                </h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  {item.answer}
-                </p>
-              </div>
-            ))}
-          </div>
+          <FaqAccordion items={faqData} />
         </div>
       </section>
       <div className="relative">
@@ -525,7 +551,7 @@ export default function LocationConnectivityPage() {
             "@graph": [
               {
                 "@type": "FAQPage",
-                "@id": "https://www.legacybygaurs.com/location-connectivity#faq",
+                "@id": "https://thelegacybygaurs.com/location-connectivity#faq",
                 "mainEntity": faqData.map(item => ({
                   "@type": "Question",
                   "name": item.question,
@@ -537,47 +563,47 @@ export default function LocationConnectivityPage() {
               },
               {
                 "@type": "BreadcrumbList",
-                "@id": "https://www.legacybygaurs.com/location-connectivity#breadcrumb",
+                "@id": "https://thelegacybygaurs.com/location-connectivity#breadcrumb",
                 "itemListElement": [
                   {
                     "@type": "ListItem",
                     "position": 1,
                     "name": "Home",
-                    "item": "https://www.legacybygaurs.com/"
+                    "item": "https://thelegacybygaurs.com/"
                   },
                   {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Location & Connectivity",
-                    "item": "https://www.legacybygaurs.com/location-connectivity"
+                    "item": "https://thelegacybygaurs.com/location-connectivity"
                   }
                 ]
               },
               {
                 "@type": "WebPage",
-                "@id": "https://www.legacybygaurs.com/location-connectivity#webpage",
-                "url": "https://www.legacybygaurs.com/location-connectivity",
+                "@id": "https://thelegacybygaurs.com/location-connectivity#webpage",
+                "url": "https://thelegacybygaurs.com/location-connectivity",
                 "name": "Legacy by Gaurs Location — Jaypee Greens Connectivity",
                 "description": "Legacy by Gaurs location at Jaypee Greens offers seamless connectivity to Pari Chowk, metro, Yamuna Expressway and the upcoming Noida International Airport.",
                 "breadcrumb": {
-                  "@id": "https://www.legacybygaurs.com/location-connectivity#breadcrumb"
+                  "@id": "https://thelegacybygaurs.com/location-connectivity#breadcrumb"
                 },
                 "about": {
-                  "@id": "https://www.legacybygaurs.com/#residence"
+                  "@id": "https://thelegacybygaurs.com/#residence"
                 },
                 "mainEntity": {
-                  "@id": "https://www.legacybygaurs.com/location-connectivity#faq"
+                  "@id": "https://thelegacybygaurs.com/location-connectivity#faq"
                 },
-                "primaryImageOfPage": "https://www.legacybygaurs.com/legacy-hero.webp",
+                "primaryImageOfPage": "https://thelegacybygaurs.com/legacy-hero.webp",
                 "inLanguage": "en-IN"
               },
               {
                 "@type": "ApartmentComplex",
-                "@id": "https://www.legacybygaurs.com/#residence",
+                "@id": "https://thelegacybygaurs.com/#residence",
                 "name": "Legacy by Gaurs",
                 "description": "Uber-luxury golf-view 4 BHK condominiums and Legacy Villas at Jaypee Greens, Greater Noida, by Gaurs Group. 265 condominiums across four towers plus 20 villas.",
-                "url": "https://www.legacybygaurs.com/",
-                "image": "https://www.legacybygaurs.com/legacy-hero.webp",
+                "url": "https://thelegacybygaurs.com/",
+                "image": "https://thelegacybygaurs.com/legacy-hero.webp",
                 "numberOfAccommodationUnits": 285,
                 "address": {
                   "@type": "PostalAddress",
@@ -596,11 +622,11 @@ export default function LocationConnectivityPage() {
               },
               {
                 "@type": "RealEstateAgent",
-                "@id": "https://www.legacybygaurs.com/#organization",
+                "@id": "https://thelegacybygaurs.com/#organization",
                 "name": "Legacy by Gaurs - Authorised Channel Partner",
-                "url": "https://www.legacybygaurs.com/",
-                "logo": "https://www.legacybygaurs.com/logo.png",
-                "image": "https://www.legacybygaurs.com/legacy-hero.webp",
+                "url": "https://thelegacybygaurs.com/",
+                "logo": "https://thelegacybygaurs.com/logo.png",
+                "image": "https://thelegacybygaurs.com/legacy-hero.webp",
                 "telephone": "+91-9810890353",
                 "address": {
                   "@type": "PostalAddress",

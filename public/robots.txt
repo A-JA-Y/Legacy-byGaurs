@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://www.legacybygaurs.com
+Host: https://thelegacybygaurs.com
 
 # Sitemaps
-Sitemap: https://www.legacybygaurs.com/sitemap.xml
+Sitemap: https://thelegacybygaurs.com/sitemap.xml

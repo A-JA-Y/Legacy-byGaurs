@@ -32,7 +32,7 @@ export default function LocationAdvantages() {
         <div className="flex flex-col lg:flex-row gap-12 items-start">
 
           {/* LEFT: TEXT */}
-          <Reveal className="flex-1 max-w-lg">
+          <Reveal variant="left" className="flex-1 max-w-lg">
 
             <h3 className="font-bold text-gray-900 mb-3 text-base">
               Strategic Connectivity
@@ -60,7 +60,7 @@ export default function LocationAdvantages() {
           </Reveal>
 
           {/* RIGHT: MAP */}
-          <Reveal delay={120} className="flex-1 w-full">
+          <Reveal delay={120} variant="right" className="flex-1 w-full">
             <div className="w-full h-[300px] md:h-[400px] rounded-lg overflow-hidden shadow-md border border-[#e5dcc5] transition-shadow duration-500 hover:shadow-xl hover:shadow-[#c8922a]/15">
               <iframe
                 title="Legacy by Gaurs location – Jaypee Greens, Greater Noida"
@@ -77,7 +77,7 @@ export default function LocationAdvantages() {
               href={`https://maps.google.com/?q=${MAP_QUERY}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-1 mt-3 text-sm text-[#c8922a] hover:underline"
+              className="link-draw group inline-flex items-center gap-1 mt-3 text-sm text-[#c8922a]"
             >
               View on Google Maps
               <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>

@@ -8,6 +8,7 @@ import heroMobile from "../assets/legacy-mb-hero.webp";
 import golfView from "../assets/golf-view.webp";
 import clubhouse from "../assets/clubhouse.webp";
 import skyLounge from "../assets-legacybygaurs/Gallery-1-Legacy-by-Gaurs.webp";
+import SplitText from "./SplitText";
 
 const AUTOPLAY_MS = 6000;
 
@@ -51,6 +52,19 @@ const Hero = () => {
   const [current, setCurrent] = useState(0);
   const [paused, setPaused] = useState(false);
   const touchStartX = useRef(null);
+  const stageRef = useRef(null);
+
+  // Pointer drift: the photograph leans a few pixels away from the cursor.
+  const onPointerMove = (e) => {
+    if (e.pointerType !== "mouse" || !stageRef.current) return;
+    const r = e.currentTarget.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - 0.5;
+    const y = (e.clientY - r.top) / r.height - 0.5;
+    stageRef.current.style.transform = `translate3d(${(-x * 18).toFixed(1)}px, ${(-y * 12).toFixed(1)}px, 0) scale(1.04)`;
+  };
+  const resetDrift = () => {
+    if (stageRef.current) stageRef.current.style.transform = "";
+  };
 
   const goTo = useCallback(
     (index) => setCurrent((index + slides.length) % slides.length),
@@ -93,53 +107,61 @@ const Hero = () => {
       <div
         className="group/hero relative w-full aspect-[4/5] md:aspect-auto md:h-[78vh] overflow-hidden"
         onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
+        onMouseLeave={() => {
+          setPaused(false);
+          resetDrift();
+        }}
+        onPointerMove={onPointerMove}
         onTouchStart={onTouchStart}
         onTouchEnd={onTouchEnd}
       >
-        {/* Slides */}
-        {slides.map((slide, index) => {
-          const isActive = index === current;
-          const slideClass = `hero-slide absolute inset-0 ${
-            isActive ? "hero-slide-active z-10" : "z-0"
-          }`;
+        {/* Slides — scroll parallax on the outer layer, pointer drift on the inner */}
+        <div className="absolute inset-[-6%_0] z-10" data-parallax="0.3">
+          <div ref={stageRef} className="absolute inset-0 transition-transform duration-700 ease-out">
+            {slides.map((slide, index) => {
+              const isActive = index === current;
+              const slideClass = `hero-slide absolute inset-0 ${
+                isActive ? "hero-slide-active z-10" : "z-0"
+              }`;
 
-          return (
-            <div key={index} className={slideClass} aria-hidden={!isActive}>
-              {slide.mobile ? (
-                <>
-                  <Image
-                    src={slide.mobile}
-                    alt={slide.alt}
-                    fill
-                    priority={index === 0}
-                    quality={82}
-                    sizes="100vw"
-                    className="hero-slide-img object-cover object-top md:hidden"
-                  />
-                  <Image
-                    src={slide.desktop}
-                    alt={slide.alt}
-                    fill
-                    priority={index === 0}
-                    quality={85}
-                    sizes="100vw"
-                    className="hero-slide-img object-cover object-center hidden md:block"
-                  />
-                </>
-              ) : (
-                <Image
-                  src={slide.desktop}
-                  alt={slide.alt}
-                  fill
-                  quality={85}
-                  sizes="100vw"
-                  className="hero-slide-img object-cover object-center"
-                />
-              )}
-            </div>
-          );
-        })}
+              return (
+                <div key={index} className={slideClass} aria-hidden={!isActive}>
+                  {slide.mobile ? (
+                    <>
+                      <Image
+                        src={slide.mobile}
+                        alt={slide.alt}
+                        fill
+                        priority={index === 0}
+                        quality={82}
+                        sizes="100vw"
+                        className="hero-slide-img object-cover object-top md:hidden"
+                      />
+                      <Image
+                        src={slide.desktop}
+                        alt={slide.alt}
+                        fill
+                        priority={index === 0}
+                        quality={85}
+                        sizes="100vw"
+                        className="hero-slide-img object-cover object-center hidden md:block"
+                      />
+                    </>
+                  ) : (
+                    <Image
+                      src={slide.desktop}
+                      alt={slide.alt}
+                      fill
+                      quality={85}
+                      sizes="100vw"
+                      className="hero-slide-img object-cover object-center"
+                    />
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
 
         {/* Cinematic gradients */}
         <div className="absolute inset-x-0 bottom-0 h-[55%] bg-gradient-to-t from-black/75 via-black/30 to-transparent z-20 pointer-events-none" />
@@ -155,12 +177,13 @@ const Hero = () => {
 
             {/* Re-keyed so the entrance animation replays each slide */}
             <div key={current}>
-              <p
-                className="hero-caption-line text-white text-2xl md:text-4xl lg:text-[2.75rem] font-semibold leading-tight max-w-2xl"
+              <SplitText
+                as="p"
+                text={active.title}
+                delay={100}
+                className="text-white text-2xl md:text-4xl lg:text-[2.75rem] font-semibold leading-tight max-w-2xl"
                 style={{ fontFamily: "var(--font-work-sans)", textShadow: "0 2px 24px rgba(0,0,0,0.45)" }}
-              >
-                {active.title}
-              </p>
+              />
               <p className="hero-caption-line hero-caption-line-2 text-white/85 text-sm md:text-base mt-2 max-w-xl">
                 {active.sub}
               </p>

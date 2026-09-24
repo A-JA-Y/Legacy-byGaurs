@@ -28,7 +28,7 @@ export type BlogMeta = {
   faqSchema?: Record<string, unknown>;
 };
 
-const SITE = "https://www.legacybygaurs.com";
+const SITE = "https://thelegacybygaurs.com";
 
 const PUBLISHER = {
   "@type": "Organization",

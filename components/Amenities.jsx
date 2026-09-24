@@ -116,6 +116,7 @@ export default function Amenities() {
               <div className="mt-5">
                 <button
                   onClick={openModal}
+                  data-magnetic
                   className="btn-shine inline-block bg-[#DCA54A] text-white text-xs rounded-[8px] font-bold uppercase px-7 py-3 cursor-pointer hover:bg-[#C08F3C] hover:shadow-lg hover:shadow-[#DCA54A]/30 hover:-translate-y-0.5 transition-all duration-300"
                 >
                   Download Brochure
@@ -124,7 +125,7 @@ export default function Amenities() {
             </Reveal>
           </div>
 
-          <Reveal delay={120} className="w-full lg:w-[50%] h-[300px] md:h-[550px] flex-shrink-0">
+          <Reveal delay={120} variant="right" className="w-full lg:w-[50%] h-[300px] md:h-[550px] flex-shrink-0">
             <div className="w-full h-full rounded-lg ring-1 ring-[#DCA54A]/30 p-1.5 transition-shadow duration-500 hover:shadow-[0_0_40px_rgba(220,165,74,0.25)]">
               <ImageSlider images={images} alt="Legacy by Gaurs amenities" />
             </div>

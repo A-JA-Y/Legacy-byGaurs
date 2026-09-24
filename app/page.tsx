@@ -22,6 +22,9 @@ const EnquirySection = dynamic(() => import("@/components/EnquirySection"));
 const QRSection = dynamic(() => import("@/components/QRSections"));
 const StickyDownloadButton = dynamic(() => import("@/components/StickyButton"));
 const Footer = dynamic(() => import("@/components/Footer"));
+const StatsBand = dynamic(() => import("@/components/StatsBand"));
+const Marquee = dynamic(() => import("@/components/Marquee"));
+const ParallaxShowcase = dynamic(() => import("@/components/ParallaxShowcase"));
 
 const HERO_IMAGE = `${brand.site}/legacy-hero.webp`;
 
@@ -134,8 +137,11 @@ export default function Home() {
         <ModalWrapper />
 
         <AboutProject heading={false} />
+        <StatsBand />
         <Amenities />
+        <Marquee />
         <GaurTownship />
+        <ParallaxShowcase />
         <ReasonsToInvest />
         <VillaFeatures />
         <PlansSection />

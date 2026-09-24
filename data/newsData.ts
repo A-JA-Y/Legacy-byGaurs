@@ -30,7 +30,7 @@ export type NewsMeta = {
   faqSchema?: Record<string, unknown>;
 };
 
-const SITE = "https://www.legacybygaurs.com";
+const SITE = "https://thelegacybygaurs.com";
 
 const NewsData: NewsMeta[] = [
   {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -13,6 +13,31 @@ const GOLD_HOVER = "#A8841E";
 export default function HomePageHeader() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
+
+  // Glass effect once the page moves; slide away on scroll down, return on scroll up.
+  useEffect(() => {
+    let lastY = window.scrollY;
+    let raf = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const y = window.scrollY;
+        setScrolled(y > 12);
+        if (Math.abs(y - lastY) > 6) {
+          setHidden(y > lastY && y > 320);
+          lastY = y;
+        }
+      });
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
 
   const isActive = (href) => {
     if (href === "/") return pathname === "/";
@@ -26,7 +51,11 @@ export default function HomePageHeader() {
   return (
     <>
       {/* Main header */}
-      <header className="w-full bg-white border-b border-[rgba(196,154,43,0.2)] shadow-sm fixed left-0 right-0 top-0 z-30">
+      <header
+        className={`site-header w-full bg-white border-b border-[rgba(196,154,43,0.2)] shadow-sm fixed left-0 right-0 top-0 z-30 ${
+          scrolled ? "is-scrolled" : ""
+        } ${hidden && !open ? "is-hidden" : ""}`}
+      >
         <div className="max-w-7xl mx-auto px-4 lg:px-8 flex items-stretch gap-0 h-[72px]">
 
           {/* Logo */}
@@ -83,6 +112,7 @@ export default function HomePageHeader() {
           <div className="hidden xl:flex items-center pl-6 border-l border-[rgba(196,154,43,0.2)] flex-shrink-0">
             <Link
               href="/contact-us"
+              data-magnetic
               className="btn-shine group inline-flex items-center gap-2 bg-[#C49A2B] hover:bg-[#A8841E] text-white text-[10px] font-semibold uppercase tracking-widest px-5 py-2.5 transition-all duration-300 hover:shadow-md hover:shadow-[#C49A2B]/40"
             >
               Enquire Now
@@ -123,7 +153,7 @@ export default function HomePageHeader() {
       {/* Mobile drawer */}
       <div
         className={`fixed top-0 left-0 h-screen z-50 flex flex-col shadow-2xl transition-transform duration-300 xl:hidden ${
-          open ? "translate-x-0" : "-translate-x-full"
+          open ? "translate-x-0 drawer-open" : "-translate-x-full"
         }`}
         style={{ width: "min(90vw, 360px)", backgroundColor: "#fff" }}
       >
@@ -133,12 +163,13 @@ export default function HomePageHeader() {
         </div>
 
         <nav className="flex-1 overflow-y-auto flex flex-col font-sans">
-          {siteNavLinks.map((item) => (
+          {siteNavLinks.map((item, i) => (
             <Link
               key={item.href}
               href={item.href}
               onClick={() => setOpen(false)}
-              className={`px-6 py-3.5 border-b border-[rgba(196,154,43,0.1)] text-[15px] font-bold tracking-wide uppercase transition-colors ${
+              style={{ "--i": i }}
+              className={`drawer-link px-6 py-3.5 border-b border-[rgba(196,154,43,0.1)] text-[15px] font-bold tracking-wide uppercase transition-colors ${
                 isActive(item.href)
                   ? "text-[#C49A2B] bg-[rgba(196,154,43,0.05)]"
                   : "text-[#444] hover:text-[#C49A2B]"
@@ -164,7 +195,7 @@ export default function HomePageHeader() {
         <button
           type="button"
           aria-label="Close menu overlay"
-          className="fixed inset-0 bg-black/40 z-40 xl:hidden"
+          className="modal-backdrop fixed inset-0 bg-black/40 backdrop-blur-[2px] z-40 xl:hidden"
           onClick={() => setOpen(false)}
         />
       )}

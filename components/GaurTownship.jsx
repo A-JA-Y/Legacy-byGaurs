@@ -41,8 +41,8 @@ export default function GaurTownship() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
           {cards.map((card, i) => (
-            <Reveal key={i} delay={i * 80}>
-              <div className="card-lift relative h-56 rounded-2xl overflow-hidden group shadow-md cursor-pointer">
+            <Reveal key={i} delay={i * 80} variant="zoom">
+              <div data-tilt className="relative h-56 md:h-72 rounded-2xl overflow-hidden group shadow-md cursor-pointer">
                 <Image
                   src={card.image}
                   alt={`${card.title} — Legacy by Gaurs, Jaypee Greens`}

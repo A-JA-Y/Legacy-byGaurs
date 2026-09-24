@@ -25,7 +25,7 @@ const AboutProject = ({ heading }) => {
       <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-10 center-box">
 
         {/* Left: Images */}
-        <Reveal className="hidden md:flex flex-col items-start relative w-full md:w-1/2 h-[500px]">
+        <Reveal variant="left" className="hidden md:flex flex-col items-start relative w-full md:w-1/2 h-[500px]">
           <ImageSlider
             images={[
               towerExterior,
@@ -100,6 +100,7 @@ const AboutProject = ({ heading }) => {
             <div className="mt-4">
               <button
                 onClick={openModal}
+                data-magnetic
                 className="btn-shine inline-block bg-[#c8952a] text-white text-xs font-semibold tracking-widest uppercase px-6 py-3 hover:bg-[#b07d1f] hover:shadow-lg hover:shadow-[#c8952a]/30 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
               >
                 Download Brochure

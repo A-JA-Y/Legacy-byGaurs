@@ -1,28 +1,19 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import { pageMetadata } from "@/data/seo";
+import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
 import Amenities from "@/components/Amenities";
 import ModalWrapper from "@/components/ModalWrapper";
 import StickyDownloadButton from "@/components/StickyButton";
 import { brand } from "@/data/brand";
+import SplitText from "@/components/SplitText";
+import StatsBand from "@/components/StatsBand";
+import Marquee from "@/components/Marquee";
+import clubhouseImg from "@/assets/clubhouse.webp";
+import skyBridgeImg from "@/assets/sky-bridge.webp";
+import gardensImg from "@/assets/green-township.webp";
 
-const TITLE =
-  "Legacy by Gaurs Amenities | House of Royals Clubhouse, HELIX Sky Bridge & Golf";
-const DESCRIPTION =
-  "Explore Legacy by Gaurs amenities — the House of Royals clubhouse, the HELIX sky bridge between towers, the Windsor landscaped podium, an indoor heated pool, spa and an 18-hole Greg Norman golf course at Jaypee Greens, Greater Noida.";
-
-export const metadata: Metadata = {
-  title: TITLE,
-  description: DESCRIPTION,
-  alternates: { canonical: `${brand.site}/amenities` },
-  openGraph: {
-    title: TITLE,
-    description: DESCRIPTION,
-    url: `${brand.site}/amenities`,
-    type: "website",
-    images: [{ url: `${brand.site}/amenities-banner.webp`, width: 1920, height: 700 }],
-  },
-};
+export const metadata: Metadata = pageMetadata("amenities");
 
 // Clubhouse facilities — brochure p. 28.
 const clubImperial = [
@@ -63,16 +54,71 @@ const township = [
 
 function Pills({ items }: { items: string[] }) {
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-wrap gap-2" data-stagger="35">
       {items.map((item) => (
         <span
           key={item}
-          className="text-[13px] text-[#5c4a2a] bg-[#faf6e8] px-3 py-1.5 rounded-full border border-[#d4c9ae]"
+          data-reveal="zoom"
+          className="text-[13px] text-[#5c4a2a] bg-[#faf6e8] px-3 py-1.5 rounded-full border border-[#d4c9ae] transition-colors duration-300 hover:bg-[#DCA54A] hover:text-white hover:border-[#DCA54A] cursor-default"
         >
           {item}
         </span>
       ))}
     </div>
+  );
+}
+
+type World = {
+  eyebrow: string;
+  title: string;
+  paras: string[];
+  items: string[];
+  image: StaticImageData;
+  imageAlt: string;
+  index: string;
+  flip?: boolean;
+  tint?: string;
+};
+
+// One "amenity world": a masked, parallax photograph beside its story.
+function WorldSection({ eyebrow, title, paras, items, image, imageAlt, index, flip, tint = "bg-white" }: World) {
+  return (
+    <section className={`w-full py-20 px-6 md:px-12 lg:px-20 overflow-hidden ${tint}`}>
+      <div className={`max-w-6xl mx-auto flex flex-col gap-12 lg:gap-16 items-center ${flip ? "lg:flex-row-reverse" : "lg:flex-row"}`}>
+        <div className="relative w-full lg:w-1/2">
+          <div data-reveal="mask" className="zoom-frame relative h-[320px] md:h-[460px] rounded-2xl overflow-hidden shadow-2xl">
+            <div className="absolute inset-[-10%_0]" data-parallax="0.08">
+              <Image src={image} alt={imageAlt} fill sizes="(max-width: 1024px) 100vw, 50vw" quality={80} className="object-cover" />
+            </div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+          </div>
+          <span
+            aria-hidden="true"
+            className={`absolute -top-10 ${flip ? "-right-2 md:-right-6" : "-left-2 md:-left-6"} text-[7rem] md:text-[9rem] font-bold leading-none text-[#DCA54A]/15 select-none pointer-events-none`}
+            style={{ fontFamily: "var(--font-work-sans)" }}
+          >
+            {index}
+          </span>
+        </div>
+
+        <div className="w-full lg:w-1/2">
+          <p data-reveal="up" className="text-xs uppercase tracking-[0.3em] text-[#c8922a] font-semibold mb-3">
+            {eyebrow}
+          </p>
+          <h2 data-reveal="up" data-reveal-delay="80" className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 leading-tight">
+            {title}
+          </h2>
+          <div data-reveal="up" data-reveal-delay="160">
+            {paras.map((p, i) => (
+              <p key={i} className={`text-base md:text-lg leading-relaxed text-gray-700 ${i === paras.length - 1 ? "mb-8" : "mb-4"}`}>
+                {p}
+              </p>
+            ))}
+          </div>
+          <Pills items={items} />
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -187,26 +233,32 @@ export default function AmenitiesPage() {
 
       {/* Hero */}
       <section className="relative w-full h-[400px] md:h-[500px] lg:h-[600px] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-[-12%_0] z-0" data-parallax="0.2">
           <Image
             src="/amenities-banner.webp"
             alt="Legacy by Gaurs amenities — the House of Royals pool at Jaypee Greens, Greater Noida"
             fill
             priority
-            className="object-cover object-center"
+            sizes="100vw"
+            className="object-cover object-center hero-kenburns"
           />
         </div>
 
-        <div className="absolute inset-0 bg-black/50 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-[#0F1535]/80 z-10" />
+        <div className="absolute inset-0 banner-lines z-10 pointer-events-none" />
 
         <div className="relative z-20 text-center text-white px-4 max-w-4xl mx-auto">
-          <span className="inline-block text-[#DCA54A] text-sm md:text-base uppercase tracking-widest font-semibold mb-3">
+          <span className="hero-anim hero-anim-1 inline-block text-[#DCA54A] text-sm md:text-base uppercase tracking-[0.35em] font-semibold mb-3">
             Lifestyle
           </span>
-          <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight">
-            Amenities
-          </h3>
-          <p className="text-base md:text-lg lg:text-xl text-gray-200 max-w-2xl mx-auto leading-relaxed">
+          <SplitText
+            as="h3"
+            text="Three Worlds of Indulgence"
+            delay={250}
+            className="block text-4xl md:text-5xl lg:text-6xl font-bold mb-5 leading-tight text-[#F5E7C8]"
+          />
+          <div className="line-grow mx-auto mb-5 h-[2px] w-28" style={{ background: "linear-gradient(90deg, transparent, #DCA54A, transparent)" }} />
+          <p className="hero-anim hero-anim-3 text-base md:text-lg lg:text-xl text-gray-200 max-w-2xl mx-auto leading-relaxed">
             The House of Royals clubhouse, the HELIX sky bridge and the Windsor
             podium — three amenity worlds, stacked.
           </p>
@@ -219,18 +271,18 @@ export default function AmenitiesPage() {
       {/* Intro */}
       <section className="w-full py-16 px-6 md:px-12 lg:px-20 bg-white">
         <div className="max-w-5xl mx-auto">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+          <h1 data-reveal="up" className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
             Legacy by Gaurs Amenities
           </h1>
 
-          <p className="text-lg md:text-xl leading-relaxed text-gray-700 mb-6">
+          <p data-reveal="up" data-reveal-delay="100" className="text-lg md:text-xl leading-relaxed text-gray-700 mb-6">
             At Legacy by Gaurs, amenities are not an afterthought — they are the
             architecture of the lifestyle. Tee off at dawn on an 18-hole Greg Norman
             course, swim an indoor heated lap through the winter, take the sky bridge
             between towers for a yoga session above the treeline, and end the evening in
             a private theatre or the billiards lounge of the House of Royals.
           </p>
-          <p className="text-lg md:text-xl leading-relaxed text-gray-700">
+          <p data-reveal="up" data-reveal-delay="180" className="text-lg md:text-xl leading-relaxed text-gray-700">
             Three distinct amenity worlds sit stacked within the project: the{" "}
             <strong>House of Royals</strong> clubhouse, the <strong>HELIX</strong> sky
             bridge suspended between the towers, and the <strong>Windsor</strong>{" "}
@@ -240,109 +292,97 @@ export default function AmenitiesPage() {
         </div>
       </section>
 
-      {/* House of Royals */}
-      <section className="w-full py-16 px-6 md:px-12 lg:px-20 bg-gray-50">
-        <div className="max-w-5xl mx-auto">
-          <p className="text-xs uppercase tracking-widest text-[#c8922a] font-semibold mb-3">
-            The Clubhouse
-          </p>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-            House of Royals — Club Imperial
-          </h2>
-          <p className="text-lg leading-relaxed text-gray-700 mb-4">
-            An epitome of luxury and modernity, this ultra-modern clubhouse is designed
-            to offer an unparalleled experience of leisure and recreation. Whether you
-            seek relaxation or an active lifestyle, Club Imperial ensures every need is
-            met with its comprehensive range of amenities.
-          </p>
-          <p className="text-lg leading-relaxed text-gray-700 mb-8">
-            Dine like royalty without leaving your castle; wake to a pool view that
-            soothes the soul; host your grandest moments in a regal party hall.
-          </p>
+      <Marquee
+        items={["House of Royals", "Club Imperial", "HELIX Sky Bridge", "Windsor Podium", "Indoor Heated Pool", "Spa & Wellness", "Private Theatre", "18-Hole Golf Course"]}
+      />
 
-          <Pills items={clubImperial} />
-        </div>
-      </section>
+      {/* House of Royals */}
+      <WorldSection
+        index="01"
+        eyebrow="The Clubhouse"
+        title="House of Royals — Club Imperial"
+        image={clubhouseImg}
+        imageAlt="House of Royals clubhouse at Legacy by Gaurs, Jaypee Greens"
+        tint="bg-gray-50"
+        paras={[
+          "An epitome of luxury and modernity, this ultra-modern clubhouse is designed to offer an unparalleled experience of leisure and recreation. Whether you seek relaxation or an active lifestyle, Club Imperial ensures every need is met with its comprehensive range of amenities.",
+          "Dine like royalty without leaving your castle; wake to a pool view that soothes the soul; host your grandest moments in a regal party hall.",
+        ]}
+        items={clubImperial}
+      />
 
       {/* HELIX */}
-      <section className="w-full py-16 px-6 md:px-12 lg:px-20 bg-white">
-        <div className="max-w-5xl mx-auto">
-          <p className="text-xs uppercase tracking-widest text-[#c8922a] font-semibold mb-3">
-            The Sky-High Luxuries
-          </p>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-            HELIX — The Sky Bridge
-          </h2>
-          <p className="text-lg leading-relaxed text-gray-700 mb-4">
-            Step into the sky walk — a serene zone above the ordinary. From yoga decks
-            and herbal gardens to indoor games and trellis walks, it is where wellness
-            meets recreation. A perfect blend of greenery and activity, crafted to
-            elevate everyday living.
-          </p>
-          <p className="text-lg leading-relaxed text-gray-700 mb-8">
-            A bridge between towers, and a statement beyond living.
-          </p>
-
-          <Pills items={helix} />
-        </div>
-      </section>
+      <WorldSection
+        index="02"
+        flip
+        eyebrow="The Sky-High Luxuries"
+        title="HELIX — The Sky Bridge"
+        image={skyBridgeImg}
+        imageAlt="HELIX sky bridge connecting the towers at Legacy by Gaurs"
+        paras={[
+          "Step into the sky walk — a serene zone above the ordinary. From yoga decks and herbal gardens to indoor games and trellis walks, it is where wellness meets recreation. A perfect blend of greenery and activity, crafted to elevate everyday living.",
+          "A bridge between towers, and a statement beyond living.",
+        ]}
+        items={helix}
+      />
 
       {/* Windsor */}
-      <section className="w-full py-16 px-6 md:px-12 lg:px-20 bg-gray-50">
-        <div className="max-w-5xl mx-auto">
-          <p className="text-xs uppercase tracking-widest text-[#c8922a] font-semibold mb-3">
-            Reserved for the Few
-          </p>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-            Windsor — The Landscaped Podium
-          </h2>
-          <p className="text-lg leading-relaxed text-gray-700 mb-4">
-            More than just a garden, it is a carefully-crafted escape where every plant
-            and tree is chosen to enhance your sense of peace and well-being. From the
-            tot lot for the little ones to the mid-teens play area, every child has a
-            space to enjoy — while fitness buffs make use of the open gym, walking
-            tracks and courts.
-          </p>
-          <p className="text-lg leading-relaxed text-gray-700 mb-8">
-            Landscaped to perfection, designed for indulgence.
-          </p>
+      <WorldSection
+        index="03"
+        eyebrow="Reserved for the Few"
+        title="Windsor — The Landscaped Podium"
+        image={gardensImg}
+        imageAlt="Windsor landscaped podium gardens at Legacy by Gaurs"
+        tint="bg-gray-50"
+        paras={[
+          "More than just a garden, it is a carefully-crafted escape where every plant and tree is chosen to enhance your sense of peace and well-being. From the tot lot for the little ones to the mid-teens play area, every child has a space to enjoy — while fitness buffs make use of the open gym, walking tracks and courts.",
+          "Landscaped to perfection, designed for indulgence.",
+        ]}
+        items={windsor}
+      />
 
-          <Pills items={windsor} />
-        </div>
-      </section>
+      <StatsBand
+        eyebrow="Amenities at a Glance"
+        title="A Resort Above the Fairways"
+        stats={[
+          { value: String(clubImperial.length), label: "Club Imperial facilities" },
+          { value: String(helix.length), label: "HELIX sky-bridge features" },
+          { value: String(windsor.length), label: "Windsor podium spaces" },
+          { value: "18", label: "Hole Greg Norman golf course" },
+        ]}
+      />
 
       {/* Township */}
       <section className="w-full py-16 px-6 md:px-12 lg:px-20 bg-white">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-4">
+          <h2 data-reveal="up" className="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-4">
             And Beyond — Life at Jaypee Greens
           </h2>
-          <p className="text-lg text-center max-w-3xl mx-auto text-gray-700 mb-12">
+          <p data-reveal="up" data-reveal-delay="100" className="text-lg text-center max-w-3xl mx-auto text-gray-700 mb-12">
             Legacy by Gaurs sits inside an established township with an identity of its
             own — one meant to impact and evolve lifestyles not just across one
             lifetime, but several.
           </p>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6" data-stagger="90">
             {township.map((t) => (
-              <div
-                key={t.name}
-                className="bg-gray-50 rounded-xl p-6 hover:shadow-lg transition-shadow border-l-4 border-[#DCA54A]"
-              >
-                <h3 className="text-lg font-bold text-gray-900 mb-2">{t.name}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{t.desc}</p>
+              <div key={t.name} data-reveal="up">
+                <div data-tilt className="h-full bg-gray-50 rounded-xl p-6 border-l-4 border-[#DCA54A]">
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">{t.name}</h3>
+                  <p className="text-gray-600 text-sm leading-relaxed">{t.desc}</p>
+                </div>
               </div>
             ))}
           </div>
 
           <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <Link href="/about-legacy-by-gaurs" className="text-[#DCA54A] hover:underline font-medium">
+            <Link href="/about-legacy-by-gaurs" className="link-draw text-[#DCA54A] font-medium">
               About Legacy by Gaurs →
             </Link>
-            <Link href="/about-gaurs-group" className="text-[#DCA54A] hover:underline font-medium">
+            <Link href="/about-gaurs-group" className="link-draw text-[#DCA54A] font-medium">
               About Gaurs Group →
             </Link>
-            <Link href="/floor-plans" className="text-[#DCA54A] hover:underline font-medium">
+            <Link href="/floor-plans" className="link-draw text-[#DCA54A] font-medium">
               Explore Floor Plans →
             </Link>
           </div>
@@ -350,8 +390,9 @@ export default function AmenitiesPage() {
       </section>
 
       {/* CTA */}
-      <section className="w-full py-16 px-6 md:px-12 lg:px-20 bg-[#1A2352]">
-        <div className="max-w-4xl mx-auto text-center">
+      <section className="relative w-full py-20 px-6 md:px-12 lg:px-20 bg-[#1A2352] overflow-hidden">
+        <div className="absolute inset-0 banner-lines pointer-events-none" />
+        <div className="relative max-w-4xl mx-auto text-center" data-reveal="up">
           <h2 className="text-3xl md:text-4xl font-bold text-[#F5E7C8] mb-6">
             Come, Be a Part of the Legacy
           </h2>
@@ -364,12 +405,14 @@ export default function AmenitiesPage() {
           <div className="flex flex-wrap justify-center gap-4">
             <Link
               href="/contact-us"
-              className="px-8 py-4 bg-[#DCA54A] text-white font-semibold rounded-lg hover:bg-[#C08F3C] transition-colors text-lg"
+              data-magnetic
+              className="btn-shine px-8 py-4 bg-[#DCA54A] text-white font-semibold rounded-lg hover:bg-[#C08F3C] transition-colors text-lg"
             >
               Enquire Now
             </Link>
             <Link
               href="/location-connectivity"
+              data-magnetic
               className="px-8 py-4 border-2 border-[#DCA54A] text-[#DCA54A] font-semibold rounded-lg hover:bg-[#DCA54A] hover:text-white transition-colors text-lg"
             >
               Location &amp; Connectivity

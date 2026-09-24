@@ -1,17 +1,12 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/data/seo";
 import PageBanner from "@/components/PageBanner";
 import AboutProject from "@/components/AboutProject";
 import GaurTownship from "@/components/GaurTownship";
 import ModalWrapper from "@/components/ModalWrapper";
 import StickyDownloadButton from "@/components/StickyButton";
-import { brand } from "@/data/brand";
 
-export const metadata: Metadata = {
-  title: "About Legacy by Gaurs | Golf-View Residences at Jaypee Greens",
-  description:
-    "Learn about Legacy by Gaurs — 265 uber-luxury 4 BHK condominiums across four towers and 20 Legacy Villas at Jaypee Greens, Greater Noida, overlooking an 18-hole Greg Norman golf course.",
-  alternates: { canonical: `${brand.site}/about-legacy-by-gaurs` },
-};
+export const metadata: Metadata = pageMetadata("about");
 
 export default function AboutLegacyByGaursPage() {
   return (

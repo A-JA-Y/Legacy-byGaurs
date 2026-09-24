@@ -13,6 +13,7 @@ export default function PrivacyPolicyPage() {
   return (
     <>
       <PageBanner
+        headingLevel="h1"
         eyebrow="Legal"
         title="Privacy Policy / Disclaimer"
         subtitle="Please read the following terms before using this website."

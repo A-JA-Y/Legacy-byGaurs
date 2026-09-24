@@ -47,7 +47,7 @@ export async function generateMetadata({ params }: { params: Params }) {
 
   const title = blog.metaTitle || blog.title;
   const description = blog.metaDescription || blog.excerpt;
-  const url = `https://www.legacybygaurs.com/blogs/${slug}`;
+  const url = `https://thelegacybygaurs.com/blogs/${slug}`;
   const imageUrl = typeof blog.image === "string" ? blog.image : "";
 
   return {
@@ -118,7 +118,7 @@ export default async function BlogDetail({ params }: { params: Params }) {
   const BlogContent = await getBlogContent(slug);
   if (!BlogContent) return notFound();
 
-  const pageUrl = `https://www.legacybygaurs.com/blogs/${slug}`;
+  const pageUrl = `https://thelegacybygaurs.com/blogs/${slug}`;
   const imageUrl = typeof blog.image === "string" ? blog.image : "";
 
   /* ── Breadcrumb Schema ── */
@@ -130,13 +130,13 @@ export default async function BlogDetail({ params }: { params: Params }) {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://www.legacybygaurs.com/",
+        item: "https://thelegacybygaurs.com/",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Blog",
-        item: "https://www.legacybygaurs.com/blogs",
+        item: "https://thelegacybygaurs.com/blogs",
       },
       {
         "@type": "ListItem",
@@ -164,7 +164,7 @@ export default async function BlogDetail({ params }: { params: Params }) {
       name: "Legacy by Gaurs",
       logo: {
         "@type": "ImageObject",
-        url: "https://www.legacybygaurs.com/logo.png",
+        url: "https://thelegacybygaurs.com/logo.png",
       },
     },
     mainEntityOfPage: {

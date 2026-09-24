@@ -55,14 +55,14 @@ export default function ReasonsToInvest() {
 
         <div className="grid md:grid-cols-2 gap-10 md:px-[8rem]">
 
-          <Reveal>
+          <Reveal variant="left">
             <h4 className="text-lg font-semibold text-gray-900 mb-4">
               Key Reasons
             </h4>
             <InvestList items={keyReasons} />
           </Reveal>
 
-          <Reveal delay={120}>
+          <Reveal delay={120} variant="right">
             <h4 className="text-lg font-semibold text-gray-900 mb-4">
               Additional Value
             </h4>

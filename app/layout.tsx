@@ -28,53 +28,18 @@ const workSans = Work_Sans({
 
 
 import { brand } from "@/data/brand";
-
-const OG_IMAGE = `${brand.site}/legacy-hero.webp`;
+import { pageMetadata } from "@/data/seo";
 
 export const metadata: Metadata = {
   metadataBase: new URL(brand.site),
-
-  title:
-    "Legacy by Gaurs | Golf-View 4 BHK Condominiums & Villas at Jaypee Greens, Greater Noida",
-  description:
-    "Legacy by Gaurs offers uber-luxury 4 BHK golf-view condominiums and 20 Legacy Villas at Jaypee Greens, Greater Noida. Four towers, an 18-hole Greg Norman golf course and the House of Royals clubhouse. RERA UPRERAPRJ688396/10/2024.",
-
-  alternates: {
-    canonical: `${brand.site}/`,
-  },
-
+  ...pageMetadata("home"),
   icons: {
     icon: "/favicon.ico",
-  },
-
-  openGraph: {
-    title: "Legacy by Gaurs — Jaypee Greens, Greater Noida",
-    description:
-      "Uber-luxury golf-view 4 BHK condominiums and Legacy Villas by Gaurs Group.",
-    url: `${brand.site}/`,
-    siteName: brand.name,
-    images: [
-      {
-        url: OG_IMAGE,
-        width: 1200,
-        height: 630,
-        alt: "Legacy by Gaurs – towers overlooking the Jaypee Greens golf course",
-      },
-    ],
-    locale: "en_IN",
-    type: "website",
-  },
-
-  twitter: {
-    card: "summary_large_image",
-    title: "Legacy by Gaurs — Jaypee Greens, Greater Noida",
-    description:
-      "Uber-luxury golf-view 4 BHK condominiums and Legacy Villas by Gaurs Group.",
-    images: [OG_IMAGE],
   },
 };
 
 import { ModalProvider } from "@/components/ModalContext";
+import MotionLayer from "@/components/MotionLayer";
 
 export default function RootLayout({
   children,
@@ -85,7 +50,12 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${inter.variable}  h-full antialiased light `}
+      suppressHydrationWarning
     >
+      <head>
+        {/* Flags JS early so scroll-reveal content is only hidden when it can be revealed. */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add(\"js\")" }} />
+      </head>
       <Analytics />
       <Script id="google-tag-manager" strategy="afterInteractive">
         {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -114,6 +84,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <ModalProvider>
           {children}
         </ModalProvider>
+        <MotionLayer />
       </body>
     </html>
   );

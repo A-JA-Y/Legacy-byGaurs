@@ -9,7 +9,7 @@ export const brand = {
   tagline: "It's Either In Your Genes Or Your Genius",
   positioning: "Uber-Luxury Golf-View Condominiums & Villas at Jaypee Greens, Greater Noida",
 
-  site: "https://www.legacybygaurs.com",
+  site: "https://thelegacybygaurs.com",
   email: "care@legacybygaurs.com",
 
   // Channel partner (authorised marketing partner — not the developer)

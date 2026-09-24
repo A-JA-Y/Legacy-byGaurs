@@ -67,7 +67,7 @@ export default function FloorPlanSection() {
       <div className="max-w-6xl mx-auto flex flex-col gap-12">
 
         {/* H1 */}
-        <div className="text-center">
+        <div className="text-center" data-reveal="up">
           <h6 className="uppercase text-xs tracking-widest text-[#DCA54A] mb-3">
             Floor Plans
           </h6>
@@ -84,7 +84,7 @@ export default function FloorPlanSection() {
         </div>
 
         {/* ── TOWER FLOOR PLATES ───────────────────────────────── */}
-        <div>
+        <div data-reveal="up">
           <h2 className="text-2xl font-bold text-gray-900 mb-2">
             Tower Floor Plans
           </h2>
@@ -97,6 +97,7 @@ export default function FloorPlanSection() {
             {towerPlans.map((plan) => (
               <div
                 key={plan.name}
+                data-tilt
                 className="relative rounded-md overflow-hidden shadow-md group cursor-pointer bg-[#0e0e0e]"
                 onClick={() => open(plan)}
               >
@@ -121,7 +122,7 @@ export default function FloorPlanSection() {
         </div>
 
         {/* ── UNIT AREA TABLE ──────────────────────────────────── */}
-        <div>
+        <div data-reveal="up">
           <h2 className="text-2xl font-bold text-gray-900 mb-2">
             Unit Plans &amp; Area Details
           </h2>
@@ -186,7 +187,7 @@ export default function FloorPlanSection() {
         </div>
 
         {/* ── LEGACY VILLAS ────────────────────────────────────── */}
-        <div>
+        <div data-reveal="up">
           <h2 className="text-2xl font-bold text-gray-900 mb-2">
             Legacy Villa Floor Plans
           </h2>
@@ -201,6 +202,7 @@ export default function FloorPlanSection() {
             {villaPlans.map((plan) => (
               <div
                 key={plan.name}
+                data-tilt
                 className="relative rounded-md overflow-hidden shadow-md group cursor-pointer bg-white border border-[#e8dfc8]"
                 onClick={() => open(plan)}
               >
@@ -242,7 +244,7 @@ export default function FloorPlanSection() {
         </div>
 
         {/* ── MASTER PLAN ──────────────────────────────────────── */}
-        <div className="flex flex-col items-center text-center mt-2">
+        <div data-reveal="zoom" className="flex flex-col items-center text-center mt-2">
           <h2 className="text-2xl font-bold text-gray-900 mb-2">
             Legacy by Gaurs Master Plan
           </h2>
@@ -280,11 +282,12 @@ export default function FloorPlanSection() {
         </div>
 
         {/* ── BROCHURE CTA ─────────────────────────────────────── */}
-        <div className="bg-[#1A2352] rounded-xl px-6 py-10 text-center">
-          <h2 className="text-2xl font-bold text-[#F5E7C8] mb-3">
+        <div data-reveal="up" className="relative overflow-hidden bg-[#1A2352] rounded-xl px-6 py-10 text-center">
+          <div className="absolute inset-0 banner-lines pointer-events-none" />
+          <h2 className="relative text-2xl font-bold text-[#F5E7C8] mb-3">
             Download the Floor Plan PDF
           </h2>
-          <p className="text-[#C9CEE4] text-sm max-w-2xl mx-auto mb-6 leading-relaxed">
+          <p className="relative text-[#C9CEE4] text-sm max-w-2xl mx-auto mb-6 leading-relaxed">
             The official brochure carries every unit plan for Buckingham, Edinburgh,
             Kensington and Versailles, all seven Legacy Villa levels, the master plan
             and the full specification list. Share your details and it downloads
@@ -292,7 +295,8 @@ export default function FloorPlanSection() {
           </p>
           <button
             onClick={openModal}
-            className="inline-block bg-[#DCA54A] hover:bg-[#C08F3C] text-white text-xs font-semibold tracking-widest uppercase px-8 py-3.5 rounded transition-colors"
+            data-magnetic
+            className="btn-shine relative inline-block bg-[#DCA54A] hover:bg-[#C08F3C] text-white text-xs font-semibold tracking-widest uppercase px-8 py-3.5 rounded cursor-pointer"
           >
             Download Brochure
           </button>

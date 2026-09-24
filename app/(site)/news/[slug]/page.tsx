@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: { params: Params }) {
 
   const title = news.metaTitle || news.title;
   const description = news.metaDescription || news.excerpt;
-  const url = `https://www.legacybygaurs.com/news/${slug}`;
+  const url = `https://thelegacybygaurs.com/news/${slug}`;
   const imageUrl = typeof news.image === "string" ? news.image : "";
 
   return {
@@ -113,7 +113,7 @@ export default async function NewsDetail({ params }: { params: Params }) {
   // If MDX content is not found, we can still show metadata but body will be empty or we can use fallback
   // For now, let's treat missing MDX as notFound if that's the intended way
 
-  const pageUrl = `https://www.legacybygaurs.com/news/${slug}`;
+  const pageUrl = `https://thelegacybygaurs.com/news/${slug}`;
   const imageUrl = typeof news.image === "string" ? news.image : "";
 
   /* ── Breadcrumb Schema ── */
@@ -125,13 +125,13 @@ export default async function NewsDetail({ params }: { params: Params }) {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://www.legacybygaurs.com/",
+        item: "https://thelegacybygaurs.com/",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "News",
-        item: "https://www.legacybygaurs.com/news",
+        item: "https://thelegacybygaurs.com/news",
       },
       {
         "@type": "ListItem",
@@ -159,7 +159,7 @@ export default async function NewsDetail({ params }: { params: Params }) {
       name: "Legacy by Gaurs",
       logo: {
         "@type": "ImageObject",
-        url: "https://www.legacybygaurs.com/logo.png",
+        url: "https://thelegacybygaurs.com/logo.png",
       },
     },
     mainEntityOfPage: {

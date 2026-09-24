@@ -38,27 +38,33 @@ export default function BlogsPage() {
     <section className="w-full min-h-screen bg-white">
 
       {/* ── HERO ── */}
-      <div className="bg-gray-50 border-b border-gray-100 px-6 pt-12 pb-8">
-        <div className="max-w-5xl mx-auto">
+      <div className="relative overflow-hidden bg-[#0F1535] px-6 pt-16 pb-12">
+        <div className="absolute inset-0 banner-lines pointer-events-none" />
+        <div className="float-orb absolute -top-24 -right-20 w-80 h-80 rounded-full bg-[#DCA54A]/20 blur-3xl pointer-events-none" />
+        <div className="relative max-w-5xl mx-auto">
 
-          <p className="text-xs uppercase tracking-widest text-gray-400 mb-3">
+          <p className="hero-anim text-xs uppercase tracking-[0.35em] text-[#DCA54A] font-semibold mb-3">
             Insights &amp; Guides
           </p>
 
-          <h1 className="text-4xl md:text-5xl font-semibold text-gray-900 leading-tight mb-8">
-            Investment knowledge,<br className="hidden md:block" /> clearly explained
+          <h1 className="hero-anim hero-anim-1 text-4xl md:text-5xl font-semibold text-[#F5E7C8] leading-tight mb-3">
+            Legacy by Gaurs Blog
           </h1>
+          <p className="hero-anim hero-anim-2 text-white/70 text-sm md:text-base max-w-2xl mb-10">
+            Buyer guides, investment analysis and Jewar Airport insights for Jaypee Greens and the Greater Noida luxury home market.
+          </p>
 
           {/* Featured Blog */}
           <Link href={`/blogs/${featured.slug}`}>
-            <div className="grid md:grid-cols-2 gap-0 rounded-2xl border border-gray-100 overflow-hidden group hover:border-gray-200 transition-colors bg-white">
+            <div data-reveal="up" className="grid md:grid-cols-2 gap-0 rounded-2xl overflow-hidden group bg-white shadow-2xl shadow-black/30 ring-1 ring-white/10 transition-shadow duration-500 hover:shadow-[#DCA54A]/20">
 
               <div className="relative w-full h-56 md:h-auto bg-gradient-to-br from-amber-50 to-yellow-100">
                 <Image
                   src={featured.image}
                   alt={featured.title}
                   fill
-                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 512px"
+                  className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
                 />
               </div>
 
@@ -67,7 +73,7 @@ export default function BlogsPage() {
                   {featured.category}
                 </span>
 
-                <h2 className="text-xl md:text-2xl font-semibold text-gray-900 leading-snug group-hover:text-gray-500 transition-colors mb-3">
+                <h2 className="text-xl md:text-2xl font-semibold text-gray-900 leading-snug group-hover:text-[#A8841E] transition-colors mb-3">
                   {featured.title}
                 </h2>
 
@@ -94,9 +100,9 @@ export default function BlogsPage() {
               <button
                 key={cat}
                 onClick={() => setActive(cat)}
-                className={`text-sm px-4 py-1.5 rounded-full border transition-all ${active === cat
-                    ? "bg-gray-900 text-white border-gray-900"
-                    : "border-gray-200 text-gray-500 hover:border-gray-400 hover:text-gray-800"
+                className={`text-sm px-4 py-1.5 rounded-full border transition-all duration-300 cursor-pointer ${active === cat
+                    ? "bg-[#DCA54A] text-[#0F1535] border-[#DCA54A] shadow-lg shadow-[#DCA54A]/30"
+                    : "border-white/20 text-white/70 hover:border-[#DCA54A] hover:text-[#DCA54A]"
                   }`}
               >
                 {cat}
@@ -119,17 +125,18 @@ export default function BlogsPage() {
             No articles in this category yet.
           </p>
         ) : (
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+          <div key={active} className="grid sm:grid-cols-2 md:grid-cols-3 gap-5" data-stagger="90">
             {filtered.map((blog) => (
-              <Link key={blog.id} href={`/blogs/${blog.slug}`}>
-                <div className="group flex flex-col h-full bg-white border border-gray-100 rounded-2xl overflow-hidden hover:border-gray-200 transition-colors">
+              <Link key={blog.id} href={`/blogs/${blog.slug}`} data-reveal="up" className="block">
+                <div data-tilt className="group flex flex-col h-full bg-white border border-gray-100 rounded-2xl overflow-hidden hover:border-[#DCA54A]/50">
 
                   <div className="relative w-full h-40 bg-gradient-to-br from-amber-50 to-yellow-100">
                     <Image
                       src={blog.image}
                       alt={blog.title}
                       fill
-                      className="object-cover"
+                      sizes="(max-width: 640px) 100vw, 320px"
+                      className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-110"
                     />
                   </div>
 
@@ -141,7 +148,7 @@ export default function BlogsPage() {
                       <span className="text-xs text-gray-400">{blog.readTime}</span>
                     </div>
 
-                    <h3 className="text-sm font-semibold text-gray-900 leading-snug group-hover:text-gray-500 transition-colors mb-2 flex-1">
+                    <h3 className="text-sm font-semibold text-gray-900 leading-snug group-hover:text-[#A8841E] transition-colors mb-2 flex-1">
                       {blog.title}
                     </h3>
 

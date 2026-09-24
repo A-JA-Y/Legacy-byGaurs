@@ -90,7 +90,7 @@ export default function VillaFeatures() {
             <div className="flex gap-2 mb-4">
               {["265", "20", "4"].map((v, i) => (
                 <div key={v} className="flex-1 text-center py-3" style={{ background: "#faf6e8", border: "0.5px solid #d4c9ae" }}>
-                  <div style={{ fontSize: "18px", fontWeight: 700, color: "#DCA54A" }}>{v}</div>
+                  <div data-count style={{ fontSize: "18px", fontWeight: 700, color: "#DCA54A" }}>{v}</div>
                   <div style={{ fontSize: "11px", color: "#8a7a5a" }}>
                     {["Condos", "Villas", "Towers"][i]}
                   </div>
