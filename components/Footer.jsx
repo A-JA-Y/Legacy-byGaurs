@@ -1,11 +1,13 @@
 import Link from "next/link";
 import { footerNavLinks } from "@/data/siteNav";
+import { networkSites } from "@/data/networkSites";
 import { brand } from "@/data/brand";
 
 export default function Footer() {
   const half = Math.ceil(footerNavLinks.length / 2);
   const col1 = footerNavLinks.slice(0, half);
   const col2 = footerNavLinks.slice(half);
+  const additionalLinks = networkSites.filter((site) => site.id !== "legacy-by-gaurs");
 
   return (
     <footer className="w-full bg-[#141004] border-t border-[rgba(242,242,242,0.11)] px-[30px] py-[20px] font-[400]">
@@ -84,6 +86,27 @@ export default function Footer() {
               </a>
             </div>
           </div>
+        </div>
+
+        {/* Additional Links — sister project websites */}
+        <div data-reveal="up" className="mb-8">
+          <p className="text-[#c9a84c] text-[11px] font-semibold tracking-widest uppercase mb-3">
+            Additional Links
+          </p>
+          <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-6 lg:gap-x-8 gap-y-2">
+            {additionalLinks.map((site) => (
+              <li key={site.id}>
+                <a
+                  href={site.url}
+                  target="_blank"
+                  rel="noopener"
+                  className="link-draw text-gray-300 text-xs hover:text-[#DCA54A]"
+                >
+                  {site.name}
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
 
         <div className="text-center mb-4">
