@@ -64,6 +64,22 @@ export const seo = {
     description:
       "Legacy by Gaurs blog: buyer guides, investment analysis & Jewar Airport insights for Jaypee Greens and the Greater Noida luxury home market.",
   },
+  // Buyer guides — standalone pages (not under /blogs), from the
+  // "Villa vs Flats" and "Super Built-Up Area vs Carpet Area" content docs.
+  villaVsFlat: {
+    path: "/villa-vs-flat-legacy-by-gaurs",
+    title: "Villa vs Flat at Legacy by Gaurs: Which Home Fits You?",
+    description:
+      "Villa vs flat at Gaurs Legacy, Jaypee Greens: compare the 20 Legacy Villas with 4 BHK golf-side condominiums on space, privacy, interiors, upkeep and resale.",
+    image: "/og/villa-vs-flat-legacy-by-gaurs.webp",
+  },
+  carpetArea: {
+    path: "/super-built-up-area-vs-carpet-area",
+    title: "Super Built-Up Area vs Carpet Area: Total Area Explained",
+    description:
+      "Super built-up area vs carpet area at Legacy by Gaurs: what total area includes, carpet by unit, loading, and maintenance billed on carpet area.",
+    image: "/og/super-built-up-area-vs-carpet-area.webp",
+  },
   news: {
     path: "/news",
     title: "Legacy by Gaurs News | Greater Noida Updates 2026",

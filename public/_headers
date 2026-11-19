@@ -1,0 +1,18 @@
+# Response headers for the Cloudflare Workers deployment (wrangler.jsonc).
+# Copied to out/_headers by `next build`; every matching rule applies.
+
+# Hashed build output never changes under the same URL.
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Hero films and social images change rarely; revalidate monthly.
+/videos/*
+  Cache-Control: public, max-age=2592000
+/og/*
+  Cache-Control: public, max-age=2592000
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
