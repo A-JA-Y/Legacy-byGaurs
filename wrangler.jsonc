@@ -1,0 +1,41 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+
+  // Cloudflare Workers deployment for thelegacybygaurs.com.
+  //
+  // The site is a Next.js static export (`output: "export"` in next.config.ts),
+  // so `npm run build` writes plain HTML, CSS, JS and media to ./out and this
+  // Worker serves that folder as static assets from Cloudflare's edge. There is
+  // no Worker script: every request is answered from the asset store.
+  //
+  //   npm run preview   build, then serve ./out locally with `wrangler dev`
+  //   npm run deploy    build, then upload ./out with `wrangler deploy`
+  "name": "legacy-by-gaurs",
+  "compatibility_date": "2026-11-10",
+
+  "assets": {
+    "directory": "./out",
+
+    // Next exports routes without trailing slashes (out/price.html), so
+    // /price serves price.html and /price/ redirects to /price.
+    "html_handling": "auto-trailing-slash",
+
+    // Unknown paths get Next's exported 404.html with a real 404 status.
+    "not_found_handling": "404-page"
+  },
+
+  // public/_headers (cache + security headers) and public/_redirects (301s)
+  // are copied into ./out by the build and applied by the asset server.
+
+  "workers_dev": true,
+  "preview_urls": true
+
+  // Production domain. Left commented out so the first deploy only creates the
+  // *.workers.dev URL and cannot move live traffic off the current host by
+  // accident. Uncomment once the zone's DNS is on Cloudflare and you are ready
+  // to cut over (add a comma after "preview_urls": true above).
+  // "routes": [
+  //   { "pattern": "thelegacybygaurs.com", "custom_domain": true },
+  //   { "pattern": "www.thelegacybygaurs.com", "custom_domain": true }
+  // ]
+}

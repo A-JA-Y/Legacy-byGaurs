@@ -1,0 +1,5 @@
+# Redirects for the Cloudflare Workers deployment (wrangler.jsonc).
+# The content docs first slotted these buyer guides under /blogs/; they are
+# published as standalone pages, so the drafted URLs forward permanently.
+/blogs/villa-vs-flat-legacy-by-gaurs /villa-vs-flat-legacy-by-gaurs 301
+/blogs/super-built-up-area-vs-carpet-area /super-built-up-area-vs-carpet-area 301
