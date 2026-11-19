@@ -116,7 +116,11 @@ export default function PricePage() {
             <p className="text-xs text-gray-500 leading-relaxed mb-6 italic">
               Total area includes covered area, balcony area and common floor area
               (519.26 sq. ft. per floor). 1 sq. mt. = 10.764 sq. ft. Areas are as per
-              the brochure and are subject to the Builder-Buyer Agreement.
+              the brochure and are subject to the Builder-Buyer Agreement.{" "}
+              <Link href="/super-built-up-area-vs-carpet-area" className="link-draw text-[#c8922a] not-italic font-semibold">
+                What total area means vs carpet area
+              </Link>
+              .
             </p>
 
             <Link
@@ -152,7 +156,11 @@ export default function PricePage() {
                 </li>
                 <li>
                   <strong>Villa vs. condominium:</strong> only 20 Legacy Villas exist,
-                  and they are priced separately from the towers.
+                  and they are priced separately from the towers.{" "}
+                  <Link href="/villa-vs-flat-legacy-by-gaurs" className="link-draw text-[#c8922a] font-semibold">
+                    Compare the two homes
+                  </Link>
+                  .
                 </li>
               </ul>
               <p>

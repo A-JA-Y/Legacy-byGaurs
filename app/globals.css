@@ -802,3 +802,148 @@ textarea {
     transform: none !important;
   }
 }
+
+/* ================================================================
+   Buyer guides — /villa-vs-flat-legacy-by-gaurs and
+   /super-built-up-area-vs-carpet-area (components/guides/*)
+   ================================================================ */
+
+/* Hero film fades in over its poster once it is actually playing. */
+.guide-film {
+  opacity: 0;
+  transition: opacity 1.6s var(--ease-lux);
+}
+
+.guide-film.is-playing {
+  opacity: 1;
+}
+
+.glass-panel {
+  background: rgba(15, 21, 53, 0.42);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid rgba(245, 231, 200, 0.16);
+}
+
+.glass-light {
+  background: rgba(255, 255, 255, 0.72);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  backdrop-filter: blur(14px) saturate(150%);
+  border: 1px solid rgba(196, 154, 43, 0.22);
+}
+
+/* Sticky chapter rail — slides down under the header when it reappears. */
+.chapter-nav {
+  transition: top 0.5s var(--ease-expo), box-shadow 0.3s ease;
+}
+
+.chapter-scroll {
+  scrollbar-width: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 16px, #000 calc(100% - 24px), transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 16px, #000 calc(100% - 24px), transparent);
+}
+
+.chapter-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.guide-section {
+  scroll-margin-top: 132px;
+}
+
+/* Drag-to-compare image slider */
+.compare {
+  --pos: 50%;
+  touch-action: pan-y;
+}
+
+.compare-top {
+  clip-path: inset(0 calc(100% - var(--pos)) 0 0);
+}
+
+.compare-handle {
+  left: var(--pos);
+}
+
+.compare-range {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: ew-resize;
+}
+
+.compare-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 56px;
+  height: 100vh;
+  background: transparent;
+  cursor: ew-resize;
+}
+
+.compare-range::-moz-range-thumb {
+  width: 56px;
+  height: 100vh;
+  border: 0;
+  background: transparent;
+  cursor: ew-resize;
+}
+
+.compare:has(.compare-range:focus-visible) .compare-knob {
+  outline: 3px solid #f5e7c8;
+  outline-offset: 3px;
+}
+
+/* Bars that draw themselves when their [data-reveal] parent scrolls in. */
+.bar-fill {
+  transform-origin: left;
+  transition: transform 1.5s var(--ease-expo);
+}
+
+.js [data-reveal]:not(.is-in) .bar-fill {
+  transform: scaleX(0);
+}
+
+/* Big outlined numerals behind section headings */
+.chapter-numeral {
+  -webkit-text-stroke: 1px rgba(196, 154, 43, 0.24);
+  color: transparent;
+}
+
+.chapter-numeral-dark {
+  -webkit-text-stroke: 1px rgba(245, 231, 200, 0.14);
+  color: transparent;
+}
+
+/* Calculator number inputs */
+.calc-input::-webkit-outer-spin-button,
+.calc-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.calc-input {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/* lite-youtube inside guide video cards fills its frame */
+.guide-video lite-youtube {
+  max-width: none;
+  width: 100%;
+  height: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .guide-film {
+    display: none;
+  }
+
+  .bar-fill,
+  .chapter-nav {
+    transition: none !important;
+  }
+
+  .js [data-reveal]:not(.is-in) .bar-fill {
+    transform: none;
+  }
+}

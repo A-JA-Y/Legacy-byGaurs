@@ -12,4 +12,10 @@ export const siteNavLinks = [
   { label: "News", href: "/news" },
 ];
 
-export const footerNavLinks = siteNavLinks;
+// Buyer guides live in the footer only, to keep the two-row header as it is.
+export const guideLinks = [
+  { label: "Villa vs Flat", href: "/villa-vs-flat-legacy-by-gaurs" },
+  { label: "Super Built-Up vs Carpet Area", href: "/super-built-up-area-vs-carpet-area" },
+];
+
+export const footerNavLinks = [...siteNavLinks, ...guideLinks];
