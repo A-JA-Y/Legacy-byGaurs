@@ -14,5 +14,13 @@ export default function Template({ children }: { children: React.ReactNode }) {
     hasMounted = true;
   }, []);
 
-  return <div ref={ref}>{children}</div>;
+  // overflow-x-clip: content parked off-screen by the side-entrance reveals
+  // (.reveal-right, [data-reveal="right"]) must not widen the page on phones.
+  // Unlike overflow-hidden it creates no scroll container, so sticky and fixed
+  // elements are unaffected.
+  return (
+    <div ref={ref} className="overflow-x-clip">
+      {children}
+    </div>
+  );
 }

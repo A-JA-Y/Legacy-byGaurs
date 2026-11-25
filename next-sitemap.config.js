@@ -4,6 +4,8 @@ module.exports = {
   siteUrl: "https://thelegacybygaurs.com",
   generateRobotsTxt: true,
   generateIndexSitemap: false,
+  // App Router icon files build as routes; keep them out of the sitemap.
+  exclude: ["/apple-icon.png"],
 
 
   transform: async (config, path) => {

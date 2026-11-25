@@ -13,7 +13,7 @@ export default function StickyDownloadButton() {
       onClick={openModal}
       aria-label="Download the Legacy by Gaurs brochure"
       className="
-        pulse-gold fixed bottom-16 right-0
+        pulse-gold fixed bottom-56 right-0
         flex flex-col items-center justify-center
         bg-[#c8952a] text-white font-semibold
         shadow-lg transition-all duration-300
