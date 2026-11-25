@@ -33,13 +33,11 @@ import { pageMetadata } from "@/data/seo";
 export const metadata: Metadata = {
   metadataBase: new URL(brand.site),
   ...pageMetadata("home"),
-  icons: {
-    icon: "/favicon.ico",
-  },
 };
 
 import { ModalProvider } from "@/components/ModalContext";
 import MotionLayer from "@/components/MotionLayer";
+import FloatingContactButtons from "@/components/FloatingContactButtons";
 
 export default function RootLayout({
   children,
@@ -85,6 +83,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           {children}
         </ModalProvider>
         <MotionLayer />
+        <FloatingContactButtons
+          phone={brand.partner.phone}
+          message="Hi, I am interested in Legacy by Gaurs, Jaypee Greens, Greater Noida. Please share the details."
+          callClassName="bg-[#1A2352] hover:bg-[#2B3050]"
+        />
       </body>
     </html>
   );
